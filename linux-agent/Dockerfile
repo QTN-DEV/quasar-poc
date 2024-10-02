@@ -25,8 +25,8 @@ RUN cd /tmp/ && \
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Add Suricata logging to Wazuh agent config
-RUN echo '<ossec_config>\n  <localfile>\n    <log_format>json</log_format>\n    <location>/var/log/suricata/eve.json</location>\n  </localfile>\n</ossec_config>' >> /var/ossec/etc/ossec.conf
+# Add Suricata logging to Wazuh agent config in the right position
+RUN sed -i '/<ossec_config>/a\  <localfile>\n    <log_format>json</log_format>\n    <location>/var/log/suricata/eve.json</location>\n  </localfile>' /var/ossec/etc/ossec.conf
 
 # Expose Suricata eve.json log file path
 VOLUME ["/var/log/suricata"]
