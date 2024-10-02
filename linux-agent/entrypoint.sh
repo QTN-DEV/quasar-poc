@@ -9,6 +9,7 @@ sed -i "s|EXTERNAL_NET:.*|EXTERNAL_NET: \"any\"|" /etc/suricata/suricata.yaml
 sed -i "s|default-rule-path:.*|default-rule-path: /etc/suricata/rules|" /etc/suricata/suricata.yaml
 sed -i "/rule-files:/a\  - \"*.rules\"" /etc/suricata/suricata.yaml
 sed -i "/rule-files:/,/suricata.rules/d" /etc/suricata/suricata.yaml
+sed -i "/af-packet:/,+1 s/interface: .*/interface: eth0/" /etc/suricata/suricata.yaml
 
 # Ensure the Suricata log configuration is only added once
 if ! grep -q "/var/log/suricata/eve.json" /var/ossec/etc/ossec.conf; then
