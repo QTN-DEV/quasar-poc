@@ -20,9 +20,6 @@ fi
 # Enable stats
 sed -i "/# Global stats configuration/,+1 s/enabled: .*/enabled: yes/" /etc/suricata/suricata.yaml
 
-# Configure af-packet interface to enX0
-sed -i "/af-packet:/,+1 s/interface: .*/interface: enX0/" /etc/suricata/suricata.yaml
-
 # Start Wazuh agent and Suricata services
 service wazuh-agent start
 service suricata start
