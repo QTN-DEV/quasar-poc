@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 ENV WAZUH_MANAGER=13.214.175.48
-ENV WAZUH_AGENT_NAME=quasar-poc
+ENV WAZUH_AGENT_NAME=suricata-poc
 
 # Install dependencies, Suricata, and Wazuh agent
 RUN apt-get update && apt-get install -y wget sudo lsb-release adduser curl software-properties-common && \
@@ -24,9 +24,6 @@ RUN cd /tmp/ && \
 # Script to dynamically set HOME_NET based on container IP
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
-
-# Add Suricata logging to Wazuh agent config in the right position
-RUN sed -i '/<ossec_config>/a\  <localfile>\n    <log_format>json</log_format>\n    <location>/var/log/suricata/eve.json</location>\n  </localfile>' /var/ossec/etc/ossec.conf
 
 # Expose Suricata eve.json log file path
 VOLUME ["/var/log/suricata"]
