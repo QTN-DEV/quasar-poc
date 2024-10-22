@@ -1,12 +1,16 @@
-## Checklist Bundled Threat Detection
+## Wazuh Agent Bundled with Suricata
 
-### Suricata
+### How To Use
 
-This is how to run the Dockerfile along with `entrypoint.sh`
+This script gives users flexibility for setting up the Wazuh agent alone or with Suricata, and allows them to input the Wazuh Manager IP and Agent Name dynamically through environment variables or runtime options.
 
-```
-docker build -t quasar-agent:suricata .
-docker run --name quasar-agent-container --net=bridge --cap-add=NET_ADMIN quasar-agent:suricata
-docker exec -it quasar-agent-container /bin/bash
-```
-If we're using bridge network, set Suricata IDS to scan eth0. But if using host network, set interface to enX0.
+1. Wazuh Agent Only 
+    ```
+    docker run -e WAZUH_MANAGER=YOUR_MANAGER_IP -e WAZUH_AGENT_NAME=YOUR_AGENT_NAME your_docker_image
+    ```
+
+2. Wazuh Agent with Suricata
+    ```
+    docker run -e WAZUH_MANAGER=YOUR_MANAGER_IP -e WAZUH_AGENT_NAME=YOUR_AGENT_NAME your_docker_image -s
+
+    ```
