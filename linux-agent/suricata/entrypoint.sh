@@ -1,23 +1,19 @@
 #!/bin/bash
 
-# Default options
-INSTALL_SURICATA=false
-WAZUH_MANAGER=""
-WAZUH_AGENT_NAME=""
+# Check if the required environment variables are provided
+if [ -z "$WAZUH_MANAGER" ] || [ -z "$WAZUH_AGENT_NAME" ]; then
+  echo "Error: Wazuh Manager IP and Agent Name are required."
+  exit 1
+fi
 
-# Parse options
-while getopts "m:a:s" opt; do
-  case $opt in
-    m) WAZUH_MANAGER=$OPTARG ;;
-    a) WAZUH_AGENT_NAME=$OPTARG ;;
-    s) INSTALL_SURICATA=true ;;
-    *) echo "Usage: $0 [-m Wazuh Manager IP] [-a Agent Name] [-s (Install Suricata)]"; exit 1 ;;
-  esac
-done
+# Update the Wazuh agent configuration with the provided Manager IP and Agent Name
+echo "Configuring Wazuh agent..."
+sed -i "s|MANAGER_IP|$WAZUH_MANAGER|g" /var/ossec/etc/ossec.conf
+sed -i "s|AGENT_NAME|$WAZUH_AGENT_NAME|g" /var/ossec/etc/ossec.conf
 
 # Install Wazuh agent
 echo "Installing Wazuh agent with Manager IP: $WAZUH_MANAGER and Agent Name: $WAZUH_AGENT_NAME"
-WAZUH_MANAGER=$WAZUH_MANAGER WAZUH_AGENT_NAME=$WAZUH_AGENT_NAME dpkg -i /wazuh-agent_4.9.0-1_amd64.deb
+dpkg -i /wazuh-agent_4.9.0-1_amd64.deb
 
 # Check if Suricata needs to be installed
 if [ "$INSTALL_SURICATA" = true ]; then
