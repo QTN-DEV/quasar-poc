@@ -64,6 +64,10 @@ RUN rm -rf /root/.cache && npm cache clean --force
 # Build Magma plugin
 RUN npm run build || (echo "Error: Check vue and vite installation"; exit 1)
 
+# Modify the API base URL in default.yml, defaulting to localhost if not set
+ENV API_BASE_URL=http://localhost:8888
+RUN sed -i "s|app.frontend.api_base_url:.*|app.frontend.api_base_url: ${API_BASE_URL}|" /app/caldera/conf/default.yml
+
 # Expose the port used by Caldera
 EXPOSE 8888
 
