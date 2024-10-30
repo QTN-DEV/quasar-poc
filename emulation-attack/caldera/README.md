@@ -1,4 +1,3 @@
-
 # CALDERA Docker Setup
 
 This repository provides a Dockerized setup for [CALDERA](https://github.com/mitre/caldera), an open-source adversary emulation platform designed for testing and evaluating security defenses. The setup includes an option to configure the CALDERA `API_BASE_URL` dynamically, making it flexible for deployment across different environments.
