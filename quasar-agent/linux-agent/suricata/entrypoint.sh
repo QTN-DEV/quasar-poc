@@ -13,7 +13,7 @@ sed -i "s|AGENT_NAME|$WAZUH_AGENT_NAME|g" /var/ossec/etc/ossec.conf
 
 # Install Wazuh agent
 echo "Installing Wazuh agent with Manager IP: $WAZUH_MANAGER and Agent Name: $WAZUH_AGENT_NAME"
-dpkg -i /wazuh-agent_4.9.0-1_amd64.deb
+dpkg -i /wazuh-agent_4.9.1-1_amd64.deb
 
 # Check if Suricata needs to be installed
 if [ "$INSTALL_SURICATA" = true ]; then

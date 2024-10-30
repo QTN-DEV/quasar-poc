@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y wget sudo lsb-release adduser curl soft
 RUN add-apt-repository ppa:oisf/suricata-stable
 
 # Download Wazuh agent
-RUN wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.9.0-1_amd64.deb
+RUN wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.9.1-1_amd64.deb
 
 # Copy entrypoint script
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
