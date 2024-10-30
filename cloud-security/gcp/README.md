@@ -1,4 +1,3 @@
-
 # GCP Project Setup with Terraform for Wazuh Integration
 
 This guide provides steps to set up a new GCP project with Terraform to enable the Wazuh GCP module for pulling log data from Google Pub/Sub. It configures a Pub/Sub topic, Cloud Logging sink, and service account with the necessary roles.
