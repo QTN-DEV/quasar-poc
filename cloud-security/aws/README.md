@@ -31,7 +31,7 @@ terraform-project/
 │   ├── s3_bucket/       # Module to create and manage S3 buckets
 │   ├── cloudtrail/      # Module for CloudTrail logging and integration
 │   ├── vpcflow/         # Module for VPC Flow Logs configuration
-│   ├── config/          # Module for AWS Config logs setup
+│   ├── cloudtrail/          # Module for AWS Config logs setup
 │   ├── guardduty/       # Module for GuardDuty logs
 │   └── <other-modules>/ # Additional modules for each supported AWS service
 ├── environments/

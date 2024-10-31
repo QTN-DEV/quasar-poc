@@ -27,8 +27,19 @@ variable "aws_profile" {
   default     = "default"  # Change to match your profile name if needed
 }
 
-variable "region" {
-  description = "AWS region for resources"
+variable "vpc_id" {
+  description = "ID of the VPC for enabling flow logs"
   type        = string
-  default     = "us-east-1"
+}
+
+variable "log_format" {
+  description = "Log format for VPC flow logs"
+  type        = string
+  default     = "default"
+}
+
+variable "enable_delete_permission" {
+  description = "Flag to enable S3 delete permissions for IAM user"
+  type        = bool
+  default     = false
 }
