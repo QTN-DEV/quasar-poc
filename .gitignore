@@ -17,3 +17,5 @@ snyk-code.sarif
 .coverage*
 coverage.xml
 htmlcov
+soar-stack/shuffle/shuffle-database/*
+cloud-security/aws/.terraform

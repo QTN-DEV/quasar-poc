@@ -1,33 +1,26 @@
-# Use Ubuntu as base image
-FROM ubuntu:latest
+# Use Ubuntu as the base image
+FROM ubuntu:22.04
 
-ENV WAZUH_MANAGER=13.214.175.48
-ENV WAZUH_AGENT_NAME=osquery-poc
+# Install prerequisites
+RUN apt-get update && apt-get install -y gnupg software-properties-common curl
 
-# Install necessary dependencies, Wazuh agent, and Osquery
-RUN apt-get update && apt-get install -y wget sudo lsb-release adduser curl software-properties-common \
-    netcat dnsutils gnupg2 && \
-    wget -qO - https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add - && \
-    echo "deb https://packages.wazuh.com/4.x/apt stable main" > /etc/apt/sources.list.d/wazuh.list && \
-    apt-get update && apt-get install -y wazuh-agent && \
-    mkdir -p /etc/apt/keyrings && \
-    curl -L https://pkg.osquery.io/deb/pubkey.gpg | tee /etc/apt/keyrings/osquery.asc && \
-    add-apt-repository 'deb [arch=amd64 signed-by=/etc/apt/keyrings/osquery.asc] https://pkg.osquery.io/deb deb main' && \
-    apt-get update && apt-get install -y osquery
+# Define OSQUERY_KEY as a build argument
+ARG OSQUERY_KEY
 
-# Copy custom osquery configuration
+# Add Osquery GPG key and repository
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "$OSQUERY_KEY" \
+    && add-apt-repository 'deb [arch=amd64] https://pkg.osquery.io/deb deb main' \
+    && apt-get update
+
+# Install Osquery
+RUN apt-get install -y osquery
+
+# Copy custom Osquery configuration into the container
 COPY osquery.conf /etc/osquery/osquery.conf
 
-# Enable and start Wazuh agent service
-RUN systemctl enable wazuh-agent && \
-    systemctl start wazuh-agent
-
-# Copy custom entrypoint script to manage Osquery and Wazuh
+# Copy entrypoint script and set permissions
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Expose necessary ports
-EXPOSE 1514 1515
-
-# Set entrypoint to manage both Osquery and Wazuh agent
+# Run entrypoint script
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

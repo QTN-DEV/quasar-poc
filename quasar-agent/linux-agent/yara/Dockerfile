@@ -1,32 +1,36 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
-ENV WAZUH_MANAGER=13.214.175.48
-ENV WAZUH_AGENT_NAME=suricataa-pocc-fix
+# Install dependencies
+RUN apt-get update && apt-get install -y wget sudo lsb-release curl make gcc autoconf libtool libssl-dev pkg-config jq
 
-# Install dependencies, Suricata, and Wazuh agent
-RUN apt-get update && apt-get install -y wget sudo lsb-release adduser curl software-properties-common && \
-    add-apt-repository ppa:oisf/suricata-stable && \
-    apt-get update && apt-get install -y suricata
+# Download and install YARA
+RUN curl -LO https://github.com/VirusTotal/yara/archive/v4.2.3.tar.gz \
+    && tar -xvzf v4.2.3.tar.gz -C /usr/local/bin/ && rm -f v4.2.3.tar.gz \
+    && cd /usr/local/bin/yara-4.2.3/ \
+    && ./bootstrap.sh && ./configure && make && make install && make check
 
-# Install Wazuh agent
-RUN wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.9.0-1_amd64.deb && \
-    WAZUH_MANAGER=$WAZUH_MANAGER WAZUH_AGENT_NAME=$WAZUH_AGENT_NAME dpkg -i ./wazuh-agent_4.9.0-1_amd64.deb && \
-    rm ./wazuh-agent_4.9.0-1_amd64.deb
+# Verify YARA Command
+RUN echo "/usr/local/lib" >> /etc/ld.so.conf \
+    && ldconfig
 
-# Download and configure Suricata ruleset
-RUN cd /tmp/ && \
-    curl -LO https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz && \
-    tar -xvzf emerging.rules.tar.gz && \
-    mkdir -p /etc/suricata/rules && \
-    mv rules/*.rules /etc/suricata/rules/ && \
-    chmod 640 /etc/suricata/rules/*.rules
+# Download YARA detection rules
+RUN mkdir -p /tmp/yara/rules && \
+    curl 'https://valhalla.nextron-systems.com/api/v1/get' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data 'demo=demo&apikey=YOUR_API_KEY&format=text' \
+    -o /tmp/yara/rules/yara_rules.yar
 
-# Script to dynamically set HOME_NET based on container IP
+# Download Wazuh agent
+RUN wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.9.1-1_amd64.deb
+
+# Copy entrypoint script and yara.sh for active response
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY yara.sh /var/ossec/active-response/bin/yara.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh /var/ossec/active-response/bin/yara.sh \
+    && chmod 750 /var/ossec/active-response/bin/yara.sh
 
-# Expose Suricata eve.json log file path
-VOLUME ["/var/log/suricata"]
+# Expose necessary volumes
+VOLUME ["/var/ossec/logs", "/tmp/yara"]
 
-# Use custom entrypoint script to start services
+# Use custom entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
