@@ -1,12 +1,22 @@
 ## Checklist Bundled Threat Detection
 
-### Suricata
+### ClamAV
 
-This is how to run the Dockerfile along with `entrypoint.sh`
+ClamAV is an open-source antivirus tool that scans for malware in email and on servers. It scans for malicious files in email attachments and on servers. Also it can detect many types of malware, including viruses. 
+
+
+ClamAV is designed to scan files quickly. It includes a multi-threaded daemon, a command-line scanner, and a tool for automatic database updates. ClamAV supports many types of files, including standard mail file formats, archive formats, executable formats, and popular document formats. ClamAV is used for email and web scanning, and endpoint security. It can be used on Unix, AIX, BSD, HP-UX, Linux, macOS, OpenVMS, OSF (Tru64), Solaris, and Haiku. 
+
+#### Directory Structure
 
 ```
-docker build -t quasar-agent:suricata .
-docker run --name quasar-agent-container --net=bridge --cap-add=NET_ADMIN quasar-agent:suricata
-docker exec -it quasar-agent-container /bin/bash
+clamav/
+├── Dockerfile
+├── README.md
+├── clamav_inotify.service
+├── clamav_inotify.sh
+├── entrypoint.sh
+└── wizard.sh
 ```
-If we're using bridge network, set Suricata IDS to scan eth0. But if using host network, set interface to enX0.
+
+> FOR NOW THE SCRIPT IS REMAIN **ERROR**.
