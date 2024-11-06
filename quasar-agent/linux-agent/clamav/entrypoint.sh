@@ -1,33 +1,35 @@
 #!/bin/bash
 
-# Get the container's IP address
-CONTAINER_IP=$(hostname -I | awk '{print $1}')
+# Check and substitute Wazuh Manager IP in ossec.conf
+if [[ -z "$WAZUH_MANAGER" ]]; then
+    echo "Error: Wazuh Manager IP not set. Exiting."
+    exit 1
+fi
+sed -i "s/MANAGER_IP/$WAZUH_MANAGER/g" /var/ossec/etc/ossec.conf
 
-# Update the Suricata configuration file with the container's IP as HOME_NET
-sed -i "s|HOME_NET:.*|HOME_NET: \"$CONTAINER_IP\"|" /etc/suricata/suricata.yaml
-sed -i "s|EXTERNAL_NET:.*|EXTERNAL_NET: \"any\"|" /etc/suricata/suricata.yaml
-sed -i "s|default-rule-path:.*|default-rule-path: /etc/suricata/rules|" /etc/suricata/suricata.yaml
-sed -i "/rule-files:/a\  - \"*.rules\"" /etc/suricata/suricata.yaml
-sed -i "/rule-files:/,/suricata.rules/d" /etc/suricata/suricata.yaml
-sed -i "/af-packet:/,+1 s/interface: .*/interface: eth0/" /etc/suricata/suricata.yaml
+echo "Starting Wazuh Agent..."
+/var/ossec/bin/ossec-control start || {
+    echo "Failed to start Wazuh Agent."
+    exit 1
+}
 
-# Ensure the Suricata log configuration is only added once
-if ! grep -q "/var/log/suricata/eve.json" /var/ossec/etc/ossec.conf; then
-    # Add Suricata log monitoring configuration
-    sed -i '/<ossec_config>/a\  <localfile>\n    <log_format>json</log_format>\n    <location>/var/log/suricata/eve.json</location>\n  </localfile>' /var/ossec/etc/ossec.conf
+echo "Starting ClamAV daemon..."
+clamd || {
+    echo "Failed to start ClamAV daemon."
+    exit 1
+}
+
+# Check if ClamAV socket directory exists and has the correct permissions
+if [[ ! -d /var/run/clamav ]]; then
+    mkdir -p /var/run/clamav
+    chown -R clamav:clamav /var/run/clamav
 fi
 
-# Enable stats
-sed -i "/# Global stats configuration/,+1 s/enabled: .*/enabled: yes/" /etc/suricata/suricata.yaml
+echo "Starting ClamAV inotify monitoring..."
+/usr/local/bin/clamav_inotify.sh || {
+    echo "Failed to start ClamAV inotify monitoring."
+    exit 1
+}
 
-# Start Wazuh agent and Suricata services
-service wazuh-agent start
-service suricata start
-
-# Check if Suricata log exists
-if [ ! -f /var/log/suricata/eve.json ]; then
-    echo "Warning: /var/log/suricata/eve.json not found. Suricata may not be generating logs."
-fi
-
-# Tail the logs to keep the container running
-tail -f /var/ossec/logs/ossec.log /var/log/suricata/eve.json
+# Keep the container running
+tail -f /var/log/ossec/ossec.log /var/log/clamav/clamd.log

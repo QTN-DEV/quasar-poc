@@ -1,0 +1,11 @@
+[Unit]
+Description=ClamAV Inotify Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/clamav_inotify.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

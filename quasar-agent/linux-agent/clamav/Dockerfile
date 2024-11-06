@@ -1,32 +1,37 @@
-FROM ubuntu:latest
+# Base image
+FROM ubuntu:22.04
 
-ENV WAZUH_MANAGER=13.214.175.48
-ENV WAZUH_AGENT_NAME=suricataa-pocc-fix
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    wget sudo curl gnupg2 lsb-release make gcc autoconf libtool \
+    libssl-dev pkg-config jq clamav clamav-daemon inotify-tools
 
-# Install dependencies, Suricata, and Wazuh agent
-RUN apt-get update && apt-get install -y wget sudo lsb-release adduser curl software-properties-common && \
-    add-apt-repository ppa:oisf/suricata-stable && \
-    apt-get update && apt-get install -y suricata
+# Set up Wazuh repository and install Wazuh Agent
+RUN wget -qO - https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add - \
+    && echo "deb https://packages.wazuh.com/4.x/apt/ stable main" > /etc/apt/sources.list.d/wazuh.list \
+    && apt-get update && apt-get install -y wazuh-agent \
+    && ls /var/ossec/bin/ || (echo "Wazuh agent installation failed" && exit 1)
 
-# Install Wazuh agent
-RUN wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.9.0-1_amd64.deb && \
-    WAZUH_MANAGER=$WAZUH_MANAGER WAZUH_AGENT_NAME=$WAZUH_AGENT_NAME dpkg -i ./wazuh-agent_4.9.0-1_amd64.deb && \
-    rm ./wazuh-agent_4.9.0-1_amd64.deb
+# Create necessary directories and set permissions for ClamAV
+RUN mkdir -p /var/run/clamav && chown -R clamav:clamav /var/run/clamav \
+    && mkdir -p /var/log/clamav && chown -R clamav:clamav /var/log/clamav
 
-# Download and configure Suricata ruleset
-RUN cd /tmp/ && \
-    curl -LO https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz && \
-    tar -xvzf emerging.rules.tar.gz && \
-    mkdir -p /etc/suricata/rules && \
-    mv rules/*.rules /etc/suricata/rules/ && \
-    chmod 640 /etc/suricata/rules/*.rules
+# Update ClamAV database without using systemctl
+RUN sed -i 's/^#Foreground .*/Foreground yes/' /etc/clamav/freshclam.conf \
+    && freshclam
 
-# Script to dynamically set HOME_NET based on container IP
+# Copy entrypoint and ClamAV inotify scripts
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY clamav_inotify.sh /usr/local/bin/clamav_inotify.sh
 
-# Expose Suricata eve.json log file path
-VOLUME ["/var/log/suricata"]
+# Make scripts executable
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/clamav_inotify.sh
 
-# Use custom entrypoint script to start services
+# Expose volumes for logs and configuration
+VOLUME ["/var/ossec/logs", "/var/log/clamav"]
+
+# Expose necessary ports for Wazuh Agent communication
+EXPOSE 1514/udp 1515/tcp
+
+# Set entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
