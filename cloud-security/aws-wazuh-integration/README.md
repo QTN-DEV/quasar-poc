@@ -1,84 +1,117 @@
+# AWS Wazuh Integration Script
 
-# AWS S3 Bucket Setup with IAM Role Using Terraform
-
-This guide helps you set up an Amazon S3 bucket with a dedicated IAM role using Terraform, specifically for use with the Wazuh AWS module. We’ll cover each step, from configuring AWS credentials to deploying the resources securely.
+This project provides an automated script using Terraform and Bash to integrate AWS logs (specifically from Amazon CloudTrail and Amazon VPC Flow Logs) with Wazuh. The setup includes dependency installation, S3 bucket configuration, IAM setup, AWS CloudTrail, and VPC flow logs configuration.
 
 ## Prerequisites
 
-- **AWS CLI**: Install and configure the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-- **Terraform**: [Install Terraform](https://www.terraform.io/downloads) on your local machine.
+You will need:
+- AWS account with permissions to create S3 buckets, IAM users, and CloudTrail/VPC configurations.
+- **Bash** and **Terraform** installed.
 
-## Step 1: Configure AWS Credentials
+### Dependency Installation
 
-Run the following command to set up AWS credentials for Terraform (AWS CLI will store these securely on your machine):
-
+The script will check and install dependencies if they are missing:
 ```bash
-aws configure
+apt-get update && apt-get install -y python3 python3-pip
+pip3 install --upgrade pip --break-system-packages
+pip3 install --break-system-packages boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 ```
-
-Provide your AWS Access Key, Secret Access Key, Region, and default Output format.
 
 ## Project Structure
 
-Here's the structure of this project:
-
+The project has the following structure:
 ```plaintext
-terraform-project/
-├── main.tf              # Main configuration, setting up providers and calling modules
-├── variables.tf         # Global variables for the project
-├── versions.tf          # Terraform and provider versioning
-├── modules/
-│   ├── s3_bucket/       # Module to create and manage S3 buckets
-│   ├── cloudtrail/      # Module for CloudTrail logging and integration
-│   ├── vpcflow/         # Module for VPC Flow Logs configuration
-│   ├── cloudtrail/          # Module for AWS Config logs setup
-│   ├── guardduty/       # Module for GuardDuty logs
-│   └── <other-modules>/ # Additional modules for each supported AWS service
-├── environments/
-│   ├── production/      # Separate environment configuration
-│   └── staging/         # Staging environment configuration
-├── outputs.tf           # Outputs for generated resources
-└── README.md            # Project documentation
+aws-wazuh-integration/
+├── main.tf                # Terraform script with all configurations
+├── variables.tf           # Variables for customization
+├── iam_policy.json        # IAM Policy for S3 access
+└── setup.sh               # Bash script wizard
 ```
 
-## Step 2: Define Variables in `variables.tf`
+## Step-by-Step Guide
 
-This file contains customizable options. The important ones include:
+### Step 1: Run the Setup Script
 
-- **`region`**: The AWS region where the resources will be created.
-- **`bucket_name`**: The name for your S3 bucket.
-- **`aws_profile`**: Your AWS CLI profile for authentication.
+Use the `setup.sh` script to guide through the configuration process.
 
-## Step 3: Initialize and Deploy the Setup
+```bash
+chmod +x setup.sh
+./setup.sh
+```
 
-1. **Initialize the project** to download any necessary provider files:
-   ```bash
-   terraform init
-   ```
+This script will:
+1. Check and install dependencies if necessary.
+2. Prompt whether to use an existing S3 bucket or create a new one.
+3. Provide manual instructions for IAM setup if credentials are unavailable.
+4. Configure AWS credentials in `/root/.aws/credentials` for the Wazuh integration.
 
-2. **Apply the configuration** to create your S3 bucket and IAM role:
-   ```bash
-   terraform apply -var="aws_profile=default" -var="region=us-east-1" -var="bucket_name=<YOUR_BUCKET_NAME>"
-   ```
-   Replace `<YOUR_BUCKET_NAME>` with a unique name for your bucket.
+### Step 2: Configure Terraform Variables
 
-3. Review the plan output, and enter `yes` to confirm deployment.
+Edit `variables.tf` to set the following parameters based on your requirements:
 
-## Step 4: Outputs and Next Steps
+- `aws_region`: The AWS region.
+- `bucket_name`: Name of the S3 bucket for logs.
+- `iam_group_name`: IAM group name for S3 access.
+- `iam_role_arn`: IAM Role ARN for VPC flow logs.
+- `vpc_id`: VPC ID for which flow logs will be enabled.
 
-After deployment, Terraform will provide details on the created resources:
+### Step 3: Run Terraform
 
-- **Bucket ARN** – The unique identifier for your S3 bucket.
-- **IAM Role ARN** – The ARN of the IAM role configured for S3 access.
+After completing the setup wizard, initialize and apply Terraform to provision resources.
 
-You can use these details to integrate the bucket and role with other AWS services or applications.
+```bash
+terraform init
+terraform apply -var="bucket_name=<your_bucket_name>" -auto-approve
+```
 
-## Additional Tips
+## Configuration Details
 
-- **Using Different AWS Profiles**: Set the `aws_profile` variable in `terraform.tfvars` if you’re using a non-default profile.
-- **Environment Variables**: You can also set AWS credentials with environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`).
-- **Remote State**: For team projects, consider using a remote backend (e.g., S3) to store the Terraform state.
+- **Amazon CloudTrail**: Configures CloudTrail to log management events to the S3 bucket with SSE-KMS encryption.
+- **Amazon VPC Flow Logs**: Configures flow logs for a specified VPC, sending logs to the S3 bucket.
+
+## Notes
+
+- **IAM Policy**: Located in `iam_policy.json`, this policy grants the necessary S3 access to the IAM user group.
+- **Delays**: The script includes sleep delays between steps to provide users time to follow the process.
 
 ---
 
-This setup provides a clean, secure foundation for managing AWS S3 and IAM resources with Terraform. For more details on customizing and scaling, check out the `.tf` files in this project!
+## Sample `iam_policy.json`
+
+The IAM policy file (`iam_policy.json`) grants S3 access to the bucket configured for log storage.
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "GetS3Logs",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::${var.bucket_name}/*",
+                "arn:aws:s3:::${var.bucket_name}"
+            ]
+        }
+    ]
+}
+```
+
+This policy should be attached to the IAM user group created in the setup.
+
+---
+
+## Summary
+
+This setup provides an efficient way to monitor AWS logs from CloudTrail and VPC flow logs with Wazuh, allowing for centralized log management and enhanced security visibility.
+
+For further customization, modify the Terraform files and `setup.sh` script according to your organization's requirements.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
