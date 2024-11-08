@@ -467,4 +467,4 @@ main
 
 - Backup: The script creates backups of all modified configuration files with a .bak extension. This allows you to restore the original configurations if needed.
 
-> SETUP CLUSTER SCRIPT IS STILL NOT WORKING AS IT WANTS.
+> SETUP CLUSTER SCRIPT IS STILL NOT WORKING AS IT WANTS
