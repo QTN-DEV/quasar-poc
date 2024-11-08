@@ -1,6 +1,6 @@
 variable "aws_region" {
   description = "AWS region"
-  default = "us-east-1"
+  default = "ap-southeast-1"
 }
 
 variable "use_existing_bucket" {
@@ -21,10 +21,11 @@ variable "iam_group_name" {
 
 variable "iam_role_arn" {
   description = "IAM Role ARN for Flow Logs"
-  type = string
+  default     = null  # or any placeholder value
 }
 
 variable "vpc_id" {
-  description = "VPC ID for which flow logs will be enabled"
-  type = string
+  description = "The ID of the VPC to enable flow logs"
+  type        = string
+  default     = "vpc-045a4aeccfd298ab0"  # Update this to your actual VPC ID
 }
