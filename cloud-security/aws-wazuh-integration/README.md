@@ -1,117 +1,296 @@
-# AWS Wazuh Integration Script
+# AWS CloudTrail and VPC Flow Logs Integration with Wazuh
 
-This project provides an automated script using Terraform and Bash to integrate AWS logs (specifically from Amazon CloudTrail and Amazon VPC Flow Logs) with Wazuh. The setup includes dependency installation, S3 bucket configuration, IAM setup, AWS CloudTrail, and VPC flow logs configuration.
-
-## Prerequisites
-
-You will need:
-- AWS account with permissions to create S3 buckets, IAM users, and CloudTrail/VPC configurations.
-- **Bash** and **Terraform** installed.
-
-### Dependency Installation
-
-The script will check and install dependencies if they are missing:
-```bash
-apt-get update && apt-get install -y python3 python3-pip
-pip3 install --upgrade pip --break-system-packages
-pip3 install --break-system-packages boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
-```
-
-## Project Structure
-
-The project has the following structure:
-```plaintext
-aws-wazuh-integration/
-├── main.tf                # Terraform script with all configurations
-├── variables.tf           # Variables for customization
-├── iam_policy.json        # IAM Policy for S3 access
-└── setup.sh               # Bash script wizard
-```
-
-## Step-by-Step Guide
-
-### Step 1: Run the Setup Script
-
-Use the `setup.sh` script to guide through the configuration process.
-
-```bash
-chmod +x setup.sh
-./setup.sh
-```
-
-This script will:
-1. Check and install dependencies if necessary.
-2. Prompt whether to use an existing S3 bucket or create a new one.
-3. Provide manual instructions for IAM setup if credentials are unavailable.
-4. Configure AWS credentials in `/root/.aws/credentials` for the Wazuh integration.
-
-### Step 2: Configure Terraform Variables
-
-Edit `variables.tf` to set the following parameters based on your requirements:
-
-- `aws_region`: The AWS region.
-- `bucket_name`: Name of the S3 bucket for logs.
-- `iam_group_name`: IAM group name for S3 access.
-- `iam_role_arn`: IAM Role ARN for VPC flow logs.
-- `vpc_id`: VPC ID for which flow logs will be enabled.
-
-### Step 3: Run Terraform
-
-After completing the setup wizard, initialize and apply Terraform to provision resources.
-
-```bash
-terraform init
-terraform apply -var="bucket_name=<your_bucket_name>" -auto-approve
-```
-
-## Configuration Details
-
-- **Amazon CloudTrail**: Configures CloudTrail to log management events to the S3 bucket with SSE-KMS encryption.
-- **Amazon VPC Flow Logs**: Configures flow logs for a specified VPC, sending logs to the S3 bucket.
-
-## Notes
-
-- **IAM Policy**: Located in `iam_policy.json`, this policy grants the necessary S3 access to the IAM user group.
-- **Delays**: The script includes sleep delays between steps to provide users time to follow the process.
+This document outlines the steps and necessary IAM policies for setting up AWS CloudTrail and VPC Flow Logs integration with Wazuh, using Terraform and a bash script to automate resource creation and configuration.
 
 ---
 
-## Sample `iam_policy.json`
+## Prerequisites
 
-The IAM policy file (`iam_policy.json`) grants S3 access to the bucket configured for log storage.
+- **AWS Account** with permissions to create IAM roles, S3 buckets, KMS keys, and enable CloudTrail and VPC Flow Logs.
+- **Terraform** and **Bash** installed on your local machine or CI/CD environment.
+
+---
+
+## IAM Policies Required
+
+To ensure `quasar-user` or any IAM user has the necessary permissions, the following IAM policies need to be created and attached:
+
+### 1. CloudTrail and KMS Permissions
+
+CloudTrail requires access to an S3 bucket for log storage and a KMS key for encryption. Create a policy that includes the following actions:
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "GetS3Logs",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                "s3:ListBucket"
-            ],
-            "Resource": [
-                "arn:aws:s3:::${var.bucket_name}/*",
-                "arn:aws:s3:::${var.bucket_name}"
-            ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:GetBucketAcl"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<your-bucket-name>/*",
+        "arn:aws:s3:::<your-bucket-name>"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*",
+        "kms:DescribeKey"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": "<your-account-id>"
+        },
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:cloudtrail:<region>:<your-account-id>:trail/*"
         }
-    ]
+      }
+    }
+  ]
 }
 ```
 
-This policy should be attached to the IAM user group created in the setup.
+### 2. VPC Flow Logs Permissions
+
+To enable VPC Flow Logs, the following policy is required:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateFlowLogs",
+        "ec2:DescribeFlowLogs",
+        "ec2:DeleteFlowLogs"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+### 3. CloudWatch Log Delivery Permissions
+
+To create and manage CloudWatch Logs delivery configurations, use the following policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:UpdateLogDelivery"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+---
+
+## Terraform Configuration
+
+Here’s the complete `main.tf` configuration for setting up AWS resources:
+
+```hcl
+provider "aws" {
+  region  = var.aws_region
+  profile = "wazuh-profile"
+}
+
+# Generate a random suffix for unique S3 bucket naming
+resource "random_id" "id" {
+  byte_length = 4
+}
+
+# S3 Bucket for logs
+resource "aws_s3_bucket" "wazuh_log_bucket" {
+  bucket         = "${var.bucket_name}-${random_id.id.hex}"
+  force_destroy  = true
+}
+
+# Separate encryption configuration for the S3 bucket
+resource "aws_s3_bucket_server_side_encryption_configuration" "wazuh_bucket_encryption" {
+  bucket = aws_s3_bucket.wazuh_log_bucket.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+# S3 Bucket Policy for CloudTrail
+resource "aws_s3_bucket_policy" "cloudtrail_bucket_policy" {
+  bucket = aws_s3_bucket.wazuh_log_bucket.id
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "cloudtrail.amazonaws.com"
+        },
+        "Action": "s3:PutObject",
+        "Resource": [
+          "arn:aws:s3:::${aws_s3_bucket.wazuh_log_bucket.bucket}/*"
+        ],
+        "Condition": {
+          "StringEquals": {
+            "s3:x-amz-acl": "bucket-owner-full-control",
+            "aws:SourceAccount": "${data.aws_caller_identity.current.account_id}"
+          },
+          "ArnLike": {
+            "aws:SourceArn": "arn:aws:cloudtrail:${var.aws_region}:${data.aws_caller_identity.current.account_id}:trail/*"
+          }
+        }
+      },
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "cloudtrail.amazonaws.com"
+        },
+        "Action": "s3:GetBucketAcl",
+        "Resource": "arn:aws:s3:::${aws_s3_bucket.wazuh_log_bucket.bucket}"
+      }
+    ]
+  })
+}
+
+# Retrieve account information for KMS policy
+data "aws_caller_identity" "current" {}
+
+# KMS Key for CloudTrail encryption
+resource "aws_kms_key" "cloudtrail_kms" {
+  description = "KMS key for encrypting CloudTrail logs"
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "cloudtrail.amazonaws.com"
+        },
+        "Action": [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:ReEncrypt*",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "aws:SourceAccount": "${data.aws_caller_identity.current.account_id}"
+          },
+          "ArnLike": {
+            "aws:SourceArn": "arn:aws:cloudtrail:${var.aws_region}:${data.aws_caller_identity.current.account_id}:trail/*"
+          }
+        }
+      },
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "${data.aws_caller_identity.current.arn}"
+        },
+        "Action": "kms:*",
+        "Resource": "*"
+      }
+    ]
+  })
+}
+
+# IAM Role for VPC Flow Logs
+resource "aws_iam_role" "vpc_flow_log_role" {
+  name = "VpcFlowLogRole"
+  assume_role_policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "sts:AssumeRole",
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "vpc-flow-logs.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+# CloudTrail Configuration
+resource "aws_cloudtrail" "wazuh_cloudtrail" {
+  name                          = "wazuh-cloudtrail"
+  s3_bucket_name                = aws_s3_bucket.wazuh_log_bucket.bucket
+  enable_log_file_validation    = true
+  kms_key_id                    = aws_kms_key.cloudtrail_kms.arn
+  is_multi_region_trail         = true
+  include_global_service_events = true
+
+  event_selector {
+    read_write_type           = "All"
+    include_management_events = true
+    data_resource {
+      type   = "AWS::S3::Object"
+      values = ["arn:aws:s3:::${aws_s3_bucket.wazuh_log_bucket.bucket}/*"]
+    }
+  }
+}
+
+# VPC Flow Logs Configuration
+resource "aws_flow_log" "vpc_flow_log" {
+  log_destination      = "arn:aws:s3:::${aws_s3_bucket.wazuh_log_bucket.bucket}"
+  log_destination_type = "s3"  
+  vpc_id               = "vpc-xxxxxx"  # Replace with your VPC ID
+  traffic_type         = "ALL"
+}
+```
+
+---
+
+## Running the Bash Script
+
+To automate the setup process, use the provided Bash script. This script will:
+- Install necessary dependencies (such as `awscli` and `python3`).
+- Set up Terraform configuration files and initialize Terraform.
+- Prompt for user input on existing resources or guide through resource creation.
+
+### Steps
+
+1. **Give execution permissions** to the script:
+   ```bash
+   chmod +x setup.sh
+   ```
+
+2. **Run the script**:
+   ```bash
+   ./setup.sh
+   ```
+
+3. **Follow the prompts** to choose between creating a new S3 bucket or using an existing one, set IAM roles, and configure CloudTrail and VPC Flow Logs.
 
 ---
 
 ## Summary
 
-This setup provides an efficient way to monitor AWS logs from CloudTrail and VPC flow logs with Wazuh, allowing for centralized log management and enhanced security visibility.
-
-For further customization, modify the Terraform files and `setup.sh` script according to your organization's requirements.
+1. **Attach IAM policies** to `quasar-user` or another IAM user to allow `ec2:CreateFlowLogs`, CloudTrail and S3 permissions, and KMS key access.
+2. **Deploy resources** with Terraform, which sets up S3 bucket, KMS encryption, IAM roles, CloudTrail, and VPC Flow Logs.
+3. **Run the Bash script** to automate deployment and follow prompts for configuration.
 
 ---
-
-## License
-
-This project is licensed under the MIT License.
