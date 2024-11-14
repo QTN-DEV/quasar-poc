@@ -43,8 +43,6 @@ services:
       - ./config/wazuh_indexer_ssl_certs/wazuh.master.pem:/etc/ssl/filebeat.pem
       - ./config/wazuh_indexer_ssl_certs/wazuh.master-key.pem:/etc/ssl/filebeat.key
       - ./config/wazuh_cluster/wazuh_manager.conf:/wazuh-config-mount/etc/ossec.conf
-      - ./config/wazuh_cluster/local_decoder/yara-decoder.xml:/var/ossec/etc/decoders/local_decoder.xml
-      - ./config/wazuh_cluster/local_rules/yara-rules.xml:/var/ossec/etc/rules/local_rules.xml
 
   wazuh.worker:
     image: wazuh/wazuh-manager:4.9.1
@@ -81,8 +79,6 @@ services:
       - ./config/wazuh_indexer_ssl_certs/wazuh.worker.pem:/etc/ssl/filebeat.pem
       - ./config/wazuh_indexer_ssl_certs/wazuh.worker-key.pem:/etc/ssl/filebeat.key
       - ./config/wazuh_cluster/wazuh_worker.conf:/wazuh-config-mount/etc/ossec.conf
-      - ./config/wazuh_cluster/local_decoder/yara-decoder.xml:/var/ossec/etc/decoders/local_decoder.xml
-      - ./config/wazuh_cluster/local_rules/yara-rules.xml:/var/ossec/etc/rules/local_rules.xml
 
   wazuh1.indexer:
     image: wazuh/wazuh-indexer:4.9.1

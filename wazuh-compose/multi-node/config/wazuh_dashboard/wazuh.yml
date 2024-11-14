@@ -5,7 +5,3 @@ hosts:
       username: wazuh-wui
       password: "MyS3cr37P450r.*-"
       run_as: false
-enrollment.dns: "18.138.237.198"
-customization.logo.app: "custom/images/customization.logo.app.png?v=1730792862012"
-customization.logo.healthcheck: "custom/images/customization.logo.healthcheck.png?v=1730792873008"
-customization.logo.reports: "custom/images/customization.logo.reports.png"
