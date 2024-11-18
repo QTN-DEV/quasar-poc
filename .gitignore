@@ -21,3 +21,6 @@ cloud-security/aws/.terraform
 *.terraform
 .terraform*
 *.tfstate
+soar-stack/case-manager/*
+!soar-stack/case-manager/docker-compose.yml
+*.backup

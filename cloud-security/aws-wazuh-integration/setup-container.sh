@@ -43,7 +43,6 @@ else
     docker exec -it $manager_container pip3 install boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
     docker exec -it $worker_container dnf install -y python3 python3-pip
-
     docker exec -it $worker_container pip3 install boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 fi
 
