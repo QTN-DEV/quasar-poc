@@ -1,11 +1,11 @@
-output "service_account_email" {
-  value = google_service_account.wazuh_service_account.email
+output "topic_name" {
+  value = google_pubsub_topic.pubsub_topic.name
 }
 
 output "subscription_id" {
-  value = google_pubsub_subscription.wazuh_subscription.id
+  value = google_pubsub_subscription.pubsub_subscription.name
 }
 
-output "sink_writer_identity" {
-  value = google_logging_project_sink.wazuh_sink.writer_identity
+output "sink_name" {
+  value = google_logging_project_sink.log_sink.name
 }

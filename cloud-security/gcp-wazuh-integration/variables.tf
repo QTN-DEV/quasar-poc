@@ -1,10 +1,19 @@
 variable "project_id" {
-  description = "GCP project ID"
+  description = "GCP Project ID"
   type        = string
 }
 
-variable "region" {
-  description = "GCP region"
+variable "topic_name" {
+  description = "Pub/Sub Topic Name"
   type        = string
-  default     = "us-central1"
+}
+
+variable "sink_name" {
+  description = "Log Sink Name"
+  type        = string
+}
+
+variable "service_account_key" {
+  description = "Path to the Service Account Key JSON file"
+  type        = string
 }
