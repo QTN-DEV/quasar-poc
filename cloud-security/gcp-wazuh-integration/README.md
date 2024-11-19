@@ -1,4 +1,3 @@
-
 # GCP Pub/Sub and Log Sink Setup with Terraform
 
 This repository contains a Terraform configuration and a setup script to configure Google Cloud Pub/Sub and a Logging Sink to integrate with Wazuh.
@@ -10,6 +9,7 @@ This repository contains a Terraform configuration and a setup script to configu
 This setup script and Terraform configuration will:
 1. Create a Pub/Sub topic and subscription.
 2. Configure a logging sink to route logs to the Pub/Sub topic.
+3. Include custom filters for VPC Flow Logs and Audit Logs.
 
 ---
 
@@ -91,6 +91,25 @@ sink_name = "wazuh-sink"
 
 ---
 
+## **Filters for Custom Use Cases**
+
+### **Cloud Audit Logs Filter**
+To collect audit logs from multiple projects:
+```plaintext
+logName=~("projects/.*/logs/cloudaudit.googleapis.com%2F(activity|data_access|system_event|policy)")
+```
+
+### **VPC Flow Logs Filter**
+To collect only VPC Flow Logs:
+```plaintext
+resource.type="gce_subnetwork"
+log_name="projects/[PROJECT_ID]/logs/compute.googleapis.com%2Fvpc_flows"
+```
+
+Replace `[PROJECT_ID]` with your GCP project ID.
+
+---
+
 ## **Cleaning Up**
 
 To remove all resources, run:
@@ -115,10 +134,21 @@ rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup
 
 3. **Invalid destination error**:
    - Ensure the sink destination is in the format:
-     ```
+     ```plaintext
      pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_NAME]
+     ```
+
+4. **Terraform Initialization Issues**:
+   - Ensure your Terraform variables are correctly defined.
+   - Remove conflicting `.terraform` files and reinitialize:
+     ```bash
+     rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup
+     terraform init
      ```
 
 For additional help, open an issue or contact support.
 
 ---
+
+## **License**
+This project is licensed under the MIT License.
