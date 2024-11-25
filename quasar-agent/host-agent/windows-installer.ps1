@@ -7,8 +7,9 @@ function Prompt-WazuhDetails {
 # Function to install Wazuh Agent
 function Install-WazuhAgent {
     Write-Host "Installing Wazuh Agent..."
-    Invoke-WebRequest -Uri "https://packages.wazuh.com/4.x/windows/wazuh-agent.msi" -OutFile "wazuh-agent.msi"
-    Start-Process -FilePath "msiexec.exe" -ArgumentList "/i wazuh-agent.msi /quiet WAZUH_MANAGER=$wazuhManagerIP WAZUH_AGENT_NAME=$wazuhAgentName" -Wait
+    $tempPath = "$env:TEMP\wazuh-agent.msi"
+    Invoke-WebRequest -Uri "https://packages.wazuh.com/4.x/windows/wazuh-agent-4.8.0-1.msi" -OutFile $tempPath
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $tempPath /q WAZUH_MANAGER=$wazuhManagerIP WAZUH_AGENT_NAME=$wazuhAgentName" -Wait
     Start-Service -Name "wazuh-agent"
     Set-Service -Name "wazuh-agent" -StartupType Automatic
     Write-Host "Wazuh Agent installation completed."
@@ -17,15 +18,18 @@ function Install-WazuhAgent {
 # Function to uninstall Wazuh Agent
 function Uninstall-WazuhAgent {
     Write-Host "Uninstalling Wazuh Agent..."
-    Start-Process -FilePath "msiexec.exe" -ArgumentList "/x {ProductCodeOfWazuhAgent} /quiet" -Wait
+    Get-WmiObject Win32_Product | Where-Object { $_.Name -match "Wazuh Agent" } | ForEach-Object {
+        $_.Uninstall()
+    }
     Write-Host "Wazuh Agent uninstalled successfully."
 }
 
 # Function to install Suricata
 function Install-Suricata {
     Write-Host "Installing Suricata..."
-    Invoke-WebRequest -Uri "https://www.openinfosecfoundation.org/download/suricata-6.0.8.msi" -OutFile "suricata.msi"
-    Start-Process -FilePath "msiexec.exe" -ArgumentList "/i suricata.msi /quiet" -Wait
+    $tempPath = "$env:TEMP\suricata.msi"
+    Invoke-WebRequest -Uri "https://www.openinfosecfoundation.org/download/suricata-6.0.8.msi" -OutFile $tempPath
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $tempPath /quiet" -Wait
     Write-Host "Suricata installation completed."
 }
 
@@ -47,8 +51,9 @@ function Configure-Suricata {
 # Function to download and setup Emerging Threats rules
 function Setup-Rules {
     Write-Host "Downloading and extracting Emerging Threats Suricata ruleset..."
-    Invoke-WebRequest -Uri "https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz" -OutFile "emerging.rules.tar.gz"
-    Expand-Archive -Path "emerging.rules.tar.gz" -DestinationPath "C:\Program Files\Suricata\rules"
+    $rulesPath = "C:\Program Files\Suricata\rules"
+    Invoke-WebRequest -Uri "https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz" -OutFile "$env:TEMP\emerging.rules.tar.gz"
+    Expand-Archive -Path "$env:TEMP\emerging.rules.tar.gz" -DestinationPath $rulesPath
     Write-Host "Ruleset setup completed."
 }
 
