@@ -117,7 +117,7 @@ install_all() {
     configure_wazuh_for_suricata
     configure_wazuh_for_clamav
     configure_wazuh_for_yara
-
+    }
 # Display simplified menu
 show_menu() {
     echo "Choose an installation option:"
