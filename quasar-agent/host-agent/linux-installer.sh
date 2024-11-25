@@ -17,6 +17,15 @@ install_wazuh_agent() {
     echo "Wazuh Agent installation completed."
 }
 
+# Function to uninstall Wazuh Agent
+uninstall_wazuh_agent() {
+    echo "Uninstalling Wazuh Agent..."
+    sudo apt-get remove --purge wazuh-agent -y
+    sudo systemctl disable wazuh-agent
+    sudo systemctl daemon-reload
+    echo "Wazuh Agent uninstalled successfully."
+}
+
 # Function to install ClamAV
 install_clamav() {
     echo "Installing ClamAV..."
@@ -157,8 +166,9 @@ show_menu() {
     echo "Choose an installation option:"
     echo "1) Install Wazuh Agent only"
     echo "2) Install Wazuh Agent with all Add-Ons (ClamAV, YARA, Suricata)"
-    echo "3) Exit"
-    read -p "Enter your choice [1-3]: " choice
+    echo "3) Uninstall Wazuh Agent"
+    echo "4) Exit"
+    read -p "Enter your choice [1-4]: " choice
     case $choice in
         1)
             prompt_wazuh_details
@@ -170,6 +180,9 @@ show_menu() {
             install_add_ons
             ;;
         3)
+            uninstall_wazuh_agent
+            ;;
+        4)
             echo "Exiting..."
             exit 0
             ;;
