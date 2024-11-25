@@ -10,8 +10,8 @@ function Install-WazuhAgent {
     $tempPath = "$env:TEMP\wazuh-agent.msi"
     Invoke-WebRequest -Uri "https://packages.wazuh.com/4.x/windows/wazuh-agent-4.8.0-1.msi" -OutFile $tempPath
     Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $tempPath /q WAZUH_MANAGER=$wazuhManagerIP WAZUH_AGENT_NAME=$wazuhAgentName" -Wait
-    Start-Service -Name "wazuh-agent"
-    Set-Service -Name "wazuh-agent" -StartupType Automatic
+    Start-Service -Name "WazuhSvct"
+    Set-Service -Name "WazuhSvc" -StartupType Automatic
     Write-Host "Wazuh Agent installation completed."
 }
 
