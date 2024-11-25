@@ -147,27 +147,19 @@ EOF'
 
 # Function to install all add-ons
 install_add_ons() {
-    install_clamav
-    install_yara
     install_suricata
-    configure_clamav
-    configure_yara
     configure_suricata
     setup_rules
-    configure_suricata
     restart_suricata
     configure_wazuh_for_suricata
-    configure_wazuh_for_clamav
-    configure_wazuh_for_yara
 }
 
 # Display simplified menu
 show_menu() {
     echo "Choose an installation option:"
     echo "1) Install Wazuh Agent only"
-    echo "2) Install Wazuh Agent with all Add-Ons (ClamAV, YARA, Suricata)"
-    echo "3) Uninstall Wazuh Agent"
-    echo "4) Exit"
+    echo "2) Uninstall Wazuh Agent"
+    echo "3) Exit"
     read -p "Enter your choice [1-4]: " choice
     case $choice in
         1)
@@ -175,14 +167,9 @@ show_menu() {
             install_wazuh_agent
             ;;
         2)
-            prompt_wazuh_details
-            install_wazuh_agent
-            install_add_ons
-            ;;
-        3)
             uninstall_wazuh_agent
             ;;
-        4)
+        3)
             echo "Exiting..."
             exit 0
             ;;
