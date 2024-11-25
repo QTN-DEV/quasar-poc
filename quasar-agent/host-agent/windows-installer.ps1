@@ -10,9 +10,9 @@ function Install-WazuhAgent {
     $tempPath = "$env:TEMP\wazuh-agent.msi"
     Invoke-WebRequest -Uri "https://packages.wazuh.com/4.x/windows/wazuh-agent-4.8.0-1.msi" -OutFile $tempPath
     Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $tempPath /q WAZUH_MANAGER=$wazuhManagerIP WAZUH_AGENT_NAME=$wazuhAgentName" -Wait
-    Start-Service -Name "WazuhSvct"
-    Set-Service -Name "WazuhSvc" -StartupType Automatic
-    Write-Host "Wazuh Agent installation completed."
+    Write-Host "Starting Wazuh Agent service..."
+    Start-Process -FilePath "cmd.exe" -ArgumentList "/c NET START WazuhSvc" -Wait
+    Write-Host "Wazuh Agent installation completed and service started."
 }
 
 # Function to uninstall Wazuh Agent
@@ -74,7 +74,8 @@ function Configure-WazuhForSuricata {
   <location>C:\Program Files\Suricata\logs\eve.json</location>
 </localfile>
 "@
-    Restart-Service -Name "wazuh-agent"
+    Write-Host "Restarting Wazuh Agent service..."
+    Start-Process -FilePath "cmd.exe" -ArgumentList "/c NET START WazuhSvc" -Wait
     Write-Host "Wazuh Agent configuration for Suricata completed."
 }
 
