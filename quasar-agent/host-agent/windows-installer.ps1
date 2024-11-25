@@ -18,9 +18,16 @@ function Install-WazuhAgent {
 # Function to uninstall Wazuh Agent
 function Uninstall-WazuhAgent {
     Write-Host "Uninstalling Wazuh Agent..."
-    Get-WmiObject Win32_Product | Where-Object { $_.Name -match "Wazuh Agent" } | ForEach-Object {
-        $_.Uninstall()
+    $tempPath = "$env:TEMP\wazuh-agent-4.8.0-1.msi"
+    
+    # Check if MSI exists in the temporary directory
+    if (-not (Test-Path $tempPath)) {
+        Write-Host "Downloading Wazuh Agent MSI for uninstallation..."
+        Invoke-WebRequest -Uri "https://packages.wazuh.com/4.x/windows/wazuh-agent-4.8.0-1.msi" -OutFile $tempPath
     }
+
+    # Uninstall using msiexec
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/x $tempPath /qn" -Wait
     Write-Host "Wazuh Agent uninstalled successfully."
 }
 
