@@ -1,89 +1,114 @@
+# Function to prompt for Wazuh Manager IP and Agent Name
+function Prompt-WazuhDetails {
+    $global:wazuhManagerIP = Read-Host "Enter Wazuh Manager IP"
+    $global:wazuhAgentName = Read-Host "Enter Wazuh Agent Name"
+}
+
 # Function to install Wazuh Agent
 function Install-WazuhAgent {
-    Write-Host "Installing Wazuh Agent..." -ForegroundColor Green
-    Invoke-WebRequest -Uri "https://packages.wazuh.com/4.x/windows/wazuh-agent-4.x.msi" -OutFile "$env:TEMP\wazuh-agent.msi"
-    Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $env:TEMP\wazuh-agent.msi /quiet" -Wait
-    Start-Service wazuh-agent
-    Set-Service wazuh-agent -StartupType Automatic
-    Write-Host "Wazuh Agent installation completed." -ForegroundColor Green
+    Write-Host "Installing Wazuh Agent..."
+    Invoke-WebRequest -Uri "https://packages.wazuh.com/4.x/windows/wazuh-agent.msi" -OutFile "wazuh-agent.msi"
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/i wazuh-agent.msi /quiet WAZUH_MANAGER=$wazuhManagerIP WAZUH_AGENT_NAME=$wazuhAgentName" -Wait
+    Start-Service -Name "wazuh-agent"
+    Set-Service -Name "wazuh-agent" -StartupType Automatic
+    Write-Host "Wazuh Agent installation completed."
 }
 
-# Function to install ClamAV
-function Install-ClamAV {
-    Write-Host "Installing ClamAV..." -ForegroundColor Green
-    Invoke-WebRequest -Uri "https://www.clamav.net/downloads/production/clamav-win-x64.zip" -OutFile "$env:TEMP\clamav.zip"
-    Expand-Archive -Path "$env:TEMP\clamav.zip" -DestinationPath "C:\ClamAV" -Force
-    Set-Location -Path "C:\ClamAV"
-    Start-Process -FilePath ".\freshclam.exe" -ArgumentList "--quiet" -Wait
-    Write-Host "ClamAV installation completed." -ForegroundColor Green
-}
-
-# Function to install YARA
-function Install-YARA {
-    Write-Host "Installing YARA..." -ForegroundColor Green
-    Invoke-WebRequest -Uri "https://github.com/VirusTotal/yara/releases/download/v4.2.3/yara-4.2.3-win64.zip" -OutFile "$env:TEMP\yara.zip"
-    Expand-Archive -Path "$env:TEMP\yara.zip" -DestinationPath "C:\YARA" -Force
-    Write-Host "YARA installation completed." -ForegroundColor Green
+# Function to uninstall Wazuh Agent
+function Uninstall-WazuhAgent {
+    Write-Host "Uninstalling Wazuh Agent..."
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/x {ProductCodeOfWazuhAgent} /quiet" -Wait
+    Write-Host "Wazuh Agent uninstalled successfully."
 }
 
 # Function to install Suricata
 function Install-Suricata {
-    Write-Host "Installing Suricata..." -ForegroundColor Green
-    Invoke-WebRequest -Uri "https://www.openinfosecfoundation.org/download/suricata-6.0.0.zip" -OutFile "$env:TEMP\suricata.zip"
-    Expand-Archive -Path "$env:TEMP\suricata.zip" -DestinationPath "C:\Suricata" -Force
-    Write-Host "Suricata installation completed." -ForegroundColor Green
+    Write-Host "Installing Suricata..."
+    Invoke-WebRequest -Uri "https://www.openinfosecfoundation.org/download/suricata-6.0.8.msi" -OutFile "suricata.msi"
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/i suricata.msi /quiet" -Wait
+    Write-Host "Suricata installation completed."
 }
 
-# Function to configure Suricata logs for Wazuh
+# Function to configure Suricata
 function Configure-Suricata {
-    Write-Host "Configuring Suricata for Wazuh integration..." -ForegroundColor Green
-    $suricataConfig = "C:\Suricata\suricata.yaml"
-    (Get-Content $suricataConfig) -replace "# output-json:", "output-json:" | Set-Content $suricataConfig
-    Write-Host "Suricata configuration completed." -ForegroundColor Green
+    Write-Host "Configuring Suricata..."
+    $homeNetIP = (Get-NetIPAddress | Where-Object { $_.AddressFamily -eq "IPv4" -and $_.InterfaceAlias -ne "Loopback" }).IPAddress
+    if (-not $homeNetIP) {
+        Write-Error "Unable to determine HOME_NET IP. Exiting."
+        return
+    }
+
+    $suricataYamlPath = "C:\Program Files\Suricata\etc\suricata.yaml"
+    (Get-Content $suricataYamlPath) -replace "HOME_NET:.*", "HOME_NET: `"$homeNetIP`"" | Set-Content $suricataYamlPath
+    (Get-Content $suricataYamlPath) -replace "- .*rules", "- `*.rules" | Set-Content $suricataYamlPath
+    Write-Host "Suricata configuration updated."
 }
 
-# Menu for user to choose installation options
+# Function to download and setup Emerging Threats rules
+function Setup-Rules {
+    Write-Host "Downloading and extracting Emerging Threats Suricata ruleset..."
+    Invoke-WebRequest -Uri "https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz" -OutFile "emerging.rules.tar.gz"
+    Expand-Archive -Path "emerging.rules.tar.gz" -DestinationPath "C:\Program Files\Suricata\rules"
+    Write-Host "Ruleset setup completed."
+}
+
+# Function to restart Suricata
+function Restart-Suricata {
+    Write-Host "Restarting Suricata service..."
+    Restart-Service -Name "Suricata"
+    Write-Host "Suricata service restarted."
+}
+
+# Function to configure Wazuh Agent for Suricata logs
+function Configure-WazuhForSuricata {
+    Write-Host "Configuring Wazuh Agent to monitor Suricata logs..."
+    $ossecConfPath = "C:\Program Files (x86)\ossec-agent\ossec.conf"
+    Add-Content -Path $ossecConfPath -Value @"
+<localfile>
+  <log_format>json</log_format>
+  <location>C:\Program Files\Suricata\logs\eve.json</location>
+</localfile>
+"@
+    Restart-Service -Name "wazuh-agent"
+    Write-Host "Wazuh Agent configuration for Suricata completed."
+}
+
+# Function to install all add-ons
+function Install-AddOns {
+    Install-Suricata
+    Configure-Suricata
+    Setup-Rules
+    Restart-Suricata
+    Configure-WazuhForSuricata
+}
+
+# Function to display menu and handle user input
 function Show-Menu {
-    Write-Host "Select an installation option:" -ForegroundColor Cyan
-    Write-Host "1) Default Installation (Wazuh Agent, ClamAV, YARA, Suricata)" -ForegroundColor White
-    Write-Host "2) Wazuh Agent with ClamAV" -ForegroundColor White
-    Write-Host "3) Wazuh Agent with YARA" -ForegroundColor White
-    Write-Host "4) Wazuh Agent with Suricata" -ForegroundColor White
-    Write-Host "5) Exit" -ForegroundColor White
-    $choice = Read-Host "Enter your choice [1-5]"
+    Write-Host "Choose an installation option:"
+    Write-Host "1) Install Wazuh Agent only"
+    Write-Host "2) Uninstall Wazuh Agent"
+    Write-Host "3) Exit"
+    $choice = Read-Host "Enter your choice [1-3]"
 
     switch ($choice) {
         1 {
+            Prompt-WazuhDetails
             Install-WazuhAgent
-            Install-ClamAV
-            Install-YARA
-            Install-Suricata
-            Configure-Suricata
         }
         2 {
-            Install-WazuhAgent
-            Install-ClamAV
+            Uninstall-WazuhAgent
         }
         3 {
-            Install-WazuhAgent
-            Install-YARA
-        }
-        4 {
-            Install-WazuhAgent
-            Install-Suricata
-            Configure-Suricata
-        }
-        5 {
-            Write-Host "Exiting..." -ForegroundColor Yellow
+            Write-Host "Exiting..."
             exit
         }
         default {
-            Write-Host "Invalid choice. Please select a valid option." -ForegroundColor Red
+            Write-Host "Invalid choice. Please select a valid option."
         }
     }
 }
 
-# Main Loop
+# Main loop
 while ($true) {
     Show-Menu
 }
