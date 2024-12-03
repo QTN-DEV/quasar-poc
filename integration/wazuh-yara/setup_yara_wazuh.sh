@@ -141,6 +141,11 @@ main() {
     configure_wazuh_agent
     echo "YARA and Wazuh integration setup completed successfully."
     echo "You can now monitor the directory $MALWARE_DIR for malware files."
+    echo "If you encounter issues with the YARA library path, please perform the following steps manually:"
+    echo -e "\nManual Steps:\n"
+    echo "sudo su"
+    echo 'echo "/usr/local/lib" >> /etc/ld.so.conf'
+    echo "ldconfig"
 }
 
 main
