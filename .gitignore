@@ -25,3 +25,4 @@ soar-stack/case-manager/*
 !soar-stack/case-manager/docker-compose.yml
 *.backup
 cloud-security/gcp-wazuh-integration/*.json
+integration/wazuh-thehive/cortex
